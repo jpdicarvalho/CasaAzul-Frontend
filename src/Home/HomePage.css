@@ -52,3 +52,31 @@
     width: 100%;
     color: #1163B4;
 }
+.container__menus{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    padding-left: 75px;
+    margin-top: 100px;
+}
+.name__menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: black;
+}
+.icon__menu{
+    margin-right: 10px;
+}
+.container__logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+    margin-top: 100px;
+}
