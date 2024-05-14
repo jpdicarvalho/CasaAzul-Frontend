@@ -15,9 +15,11 @@
     font-size: 22px;
 }
 .tittle__form{
+    padding-left: 10px;
     color: black;
 }
 .subtittle__form{
+    padding-left: 10px;
     font-size: 14px;
     color: rgb(147, 144, 144);
     margin-bottom: 20px;

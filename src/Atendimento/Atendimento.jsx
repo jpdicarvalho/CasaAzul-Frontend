@@ -1,5 +1,8 @@
-import { Link } from 'react-router-dom';
-import './HomePage.css'
+import { useState } from 'react';
+
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
+import './Atendimento.css'
 import logoCasaAzul from './logo-casaAzul.png'
 
 import { HiOutlineDocumentReport } from "react-icons/hi";
@@ -8,9 +11,26 @@ import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
+import { IoGitNetworkOutline } from "react-icons/io5";
 
 
-const HomePage = () =>{
+
+const Atendimento = () =>{
+
+const navigate = useNavigate();
+const location = useLocation();
+
+const { atendimento } = location.state;
+
+//passando os dados da barbearia selecionada
+const navigateToAddNewPatient = () => {
+    navigate("/AddNewPatient");
+};
+const navigateToPaciente = (paciente) => {
+    navigate("/Paciente", {state: {paciente}});
+};
+console.log(atendimento)
+
 
     return(
         <div className="main">
@@ -30,14 +50,20 @@ const HomePage = () =>{
                 </div>
             </div>
             <div className="container__menus">
-                <Link className='name__menu'>
-                    <HiOutlineDocumentReport className='icon__menu'/> Relatórios
+                <Link className={`name__menu ${atendimento ? 'selected':''}`}>
+                    <IoGitNetworkOutline className='icon__menu'/> Atendimento
                 </Link>
                 <Link className='name__menu'>
                     <PiUsers className='icon__menu'/> Colaboradores
                 </Link>
-                <Link className='name__menu'>
-                    <LiaUserSolid className='icon__menu'/> Pacientes
+                <div onClick={() => navigateToPaciente("paciente")}>
+                    <Link className='name__menu'>
+                        <LiaUserSolid className='icon__menu'/> Pacientes
+                    </Link>
+                </div>
+                
+                <Link className="name__menu">
+                    <HiOutlineDocumentReport className='icon__menu'/> Relatórios
                 </Link>
                 <Link className='name__menu'>
                     <CiSettings className='icon__menu'/> Configuraçõe
@@ -50,14 +76,14 @@ const HomePage = () =>{
             </div>
             <div className="section__information">
                 <div className="container__search">
-                    <IoCaretBackCircleOutline className='icon__back'/> <input type="search" className='inputSearch' placeholder='Pesquisar'/>
+                    <input type="search" className='inputSearch' placeholder='Pesquisar'/>
                 </div>
                 <div className="container__addPaciente">
                     <div className="tittle__information">
-                        Lista de Pacientes
+                        Atendimentos
                     </div>
-                    <button className='add__paciente'>
-                        Adicionar paciente
+                    <button className='add__paciente' onClick={navigateToAddNewPatient}>
+                        Criar atendimento
                     </button>
                 </div>
                 <div className="container__tittle__table">
@@ -74,4 +100,4 @@ const HomePage = () =>{
         
     )
 };
-export default HomePage;
+export default Atendimento;

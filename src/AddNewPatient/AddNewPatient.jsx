@@ -1,10 +1,20 @@
+import { useNavigate } from "react-router-dom"
 import './AddNewPatient.css'
+import { IoCaretBackCircleOutline } from "react-icons/io5";
+
 
 const AddNewPatient = () =>{
+const navigate = useNavigate();
+
+const navigateToPaciente = (paciente) => {
+    navigate("/Paciente", {state: {paciente}});
+};
 
     return(
         <div className="container__form">
             <div className='main__form'>
+                <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToPaciente("paciente")}/>
+
                 <div className="tittle__form">
                     Adicionar Paciente
                 </div>

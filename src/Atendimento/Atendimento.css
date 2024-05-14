@@ -1,0 +1,7 @@
+.selected{
+    border-radius: 12px;
+    padding: 5px;
+    background: #1163B4;
+    color: #fff;
+    transition: 0.5s;
+}
