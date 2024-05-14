@@ -7,12 +7,14 @@ import { PiUsers } from "react-icons/pi";
 import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
+import { IoCaretBackCircleOutline } from "react-icons/io5";
 
 
 const HomePage = () =>{
 
     return(
-        <div className="menu__lateral">
+        <div className="main">
+            <div className="menu__lateral">
             <div className="logo">
                 CASA AZUL
             </div>
@@ -43,10 +45,33 @@ const HomePage = () =>{
             </div>
             <div className="container__logout">
                 <p style={{marginRight: '20px'}}>Sair</p><IoIosLogOut />
-
             </div>
                 
+            </div>
+            <div className="section__information">
+                <div className="container__search">
+                    <IoCaretBackCircleOutline className='icon__back'/> <input type="search" className='inputSearch' placeholder='Pesquisar'/>
+                </div>
+                <div className="container__addPaciente">
+                    <div className="tittle__information">
+                        Lista de Pacientes
+                    </div>
+                    <button className='add__paciente'>
+                        Adicionar paciente
+                    </button>
+                </div>
+                <div className="container__tittle__table">
+                    <p>Nome</p>
+                    <p>Data de nascimento</p>
+                    <p>Endereço</p>
+                    <p>Data de inscrição</p>
+                    <p>Laudo</p>
+                    <p>CID</p>
+                </div>
+            </div>
         </div>
+        
+        
     )
 };
 export default HomePage;

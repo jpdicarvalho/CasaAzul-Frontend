@@ -1,9 +1,11 @@
+.main{
+    display: flex;
+}
 .menu__lateral{
     min-height: 710px;
     width: 270px;
     padding-top: 10px;
     background: #0DB6D321;
-    ;
 }
 .logo{
     margin-bottom: 50px;
@@ -57,7 +59,7 @@
     justify-content: start;
     align-items: start;
     flex-direction: column;
-    padding-left: 75px;
+    padding-left: 50px;
     margin-top: 100px;
 }
 .name__menu{
@@ -79,4 +81,54 @@
     color: black;
     font-size: 16px;
     margin-top: 100px;
+}
+.section__information{
+    background: #d8d7d730;
+    width: 100%;
+}
+.container__search{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    padding-left: 10px;
+    background: #fff;
+}
+.icon__back{
+    color: grey;
+    font-size: 30px;
+}
+.inputSearch{
+    padding-left: 10px;
+    outline: none;
+    width: 215px;
+    height: 35px;
+    border: 1px solid #E5E5E5;
+    border-radius: 12px;
+}
+.container__addPaciente{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    margin-top: 20px;
+    border-bottom: 1px solid #E5E5E5;
+    font-size: 25px;
+    color: black;
+    padding: 5px;
+    padding-left: 12px;
+}
+.add__paciente{
+    height: 40px;
+    width: 200px;
+    color: #fff;
+    background: #1163B4;
+    border: none;
+    border-radius: 12px;
+}
+.container__tittle__table{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    padding-left: 10px;
+    color: #E5E5E5;
+    font-weight: bold;
 }
