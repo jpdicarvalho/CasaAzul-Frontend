@@ -1,0 +1,54 @@
+.container__form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000;
+    height: 100%;
+    padding: 50px;
+    background: linear-gradient(#437DF7, #0DB6D3);
+}
+.main__form{
+    background: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 22px;
+}
+.tittle__form{
+    color: black;
+}
+.subtittle__form{
+    font-size: 14px;
+    color: rgb(147, 144, 144);
+    margin-bottom: 20px;
+}
+.container__inputs{
+    display: flex;
+}
+.Input__box{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 415px;
+}
+label{
+    font-size: 14px;
+    color: black;
+}
+.input__inner{
+    outline: none;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #716e6ec6;
+}
+.Btn_cadastrar{
+    background: transparent;
+    border: 1px solid blue;
+    height: 45px;
+    width: 415px;
+    margin-top: 30px;
+    margin-left: 15px;
+    font-size: 16px;
+    color: blue;
+    border-radius: 5px;
+}

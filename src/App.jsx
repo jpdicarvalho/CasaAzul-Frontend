@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './Home/HomePage';
+import AddNewPatient from './AddNewPatient/AddNewPatient';
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
       <Routes>
 
         <Route path='/HomePage' element={<HomePage/>}/>
+        <Route path='/AddNewPatient' element={<AddNewPatient/>}/>
 
       </Routes>
     </Router>
