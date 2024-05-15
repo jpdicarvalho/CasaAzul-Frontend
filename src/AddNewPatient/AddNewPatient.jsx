@@ -26,6 +26,9 @@ const [hasLaudo, setHasLaudo] = useState('');
 const [newCID, setNewCID] = useState('');
 const [message, setMessage] = useState('');
 
+const date = new Date()
+const currentDate = new Date(date);
+const token = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}-${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
 const objectPatient ={
     newName,
@@ -37,7 +40,8 @@ const objectPatient ={
     newCity,
     newDateCreation,
     hasLaudo,
-    newCID
+    newCID,
+    token
 }
 
 function validationForm (objectPatient) {
