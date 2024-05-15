@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import './AddNewPatient.css'
 import { IoCaretBackCircleOutline } from "react-icons/io5";
+import { MdOutlineErrorOutline } from "react-icons/md";
+
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 const AddNewPatient = () =>{
@@ -19,8 +22,10 @@ const [newNumber, setNewNumber] = useState('');
 const [newBairro, setNewBairro] = useState('');
 const [newCity, setNewCity] = useState('');
 const [newDateCreation, setNewDateCreation] = useState('');
-const [newLaudo, setNewLaudo] = useState('');
+const [hasLaudo, setHasLaudo] = useState('');
 const [newCID, setNewCID] = useState('');
+const [message, setMessage] = useState('');
+
 
 const objectPatient =[
     newName,
@@ -31,7 +36,7 @@ const objectPatient =[
     newBairro,
     newCity,
     newDateCreation,
-    newLaudo,
+    hasLaudo,
     newCID
 ]
 
@@ -43,10 +48,23 @@ function validationForm (objectPatient) {
     }
 }
 const isValidated = validationForm(objectPatient)
-
+console.log(hasLaudo)
 const createNewPatient = () =>{
     if(isValidated != false){
-        console.log("deu certo");
+        axios.post('http://localhost:8000/api/AddNewPatient', objectPatient)
+        .then(res => {
+            if(res.data.Success === "Success"){
+                setMessage("Paciente cadastrado com sucesso!")
+                setTimeout(() => {
+                    setMessage(null);
+                  }, 2000);
+            }
+        }).catch(err => console.log(err))
+    }else{
+        setMessage("É necessário preencher todos os campos.")
+        setTimeout(() => {
+            setMessage(null);
+          }, 2000);
     }
     
 }
@@ -98,13 +116,44 @@ const createNewPatient = () =>{
                             <input type="date" className='input__inner'onChange={(e) => {setNewDateCreation(e.target.value)}}/>
                         </div>
                         <div className="Input__box">
-                            <label htmlFor="">Laudo</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewLaudo(e.target.value)}}/>
+                            <label htmlFor="">Possuí Laudo? </label>
+                            <label className="input__ckeckBox">
+                                <input 
+                                    type="checkbox"  
+                                    className='input__inner'
+                                    checked={hasLaudo}
+                                    onChange={(e) => {setHasLaudo(e.target.checked)}} // Define o estado como true se marcado, false se não marcado
+                                />
+                                Sim
+                            </label>
+
+                            <label className="input__ckeckBox">
+                                <input 
+                                    type="checkbox"  
+                                    className='input__inner'
+                                    checked={!hasLaudo}
+                                    onChange={(e) => {setHasLaudo(!e.target.checked), setNewCID("não consta")}} // Define o estado como false se marcado, true se não marcado
+                                />
+                                Não
+                            </label>
                         </div>
-                        <div className="Input__box">
-                            <label htmlFor="">CID</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}}/>
-                        </div>
+                        {hasLaudo &&(
+                            <div className="Input__box">
+                                <label htmlFor="">CID</label>
+                                <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}}/>
+                            </div>
+                        )}
+                        
+                        {message === "Paciente cadastrado com sucesso!" ? (
+                            <div className="message__success">
+                                {message}
+                            </div>
+                        ):(
+                            <div className={` ${message ? 'message__erro' : ''}`}>
+                                <MdOutlineErrorOutline  className="icon__erro"/>{message}
+                            </div>
+                            
+                        )}
                         <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={createNewPatient}>
                             Cadastrar
                         </button>

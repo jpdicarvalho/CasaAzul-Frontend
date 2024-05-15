@@ -67,3 +67,30 @@ label{
     border-radius: 5px;
     transition: 0.5s;
 }
+.input__ckeckBox{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.input__inner{
+    margin-right: 10px;
+}
+.message__success{
+}
+.message__erro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    max-width: 400px;
+    border: 1px solid red;
+    background: rgba(255, 0, 0, 0.1);
+    color: red;
+    border-radius: 10px;
+    padding: 3px;
+    font-size: 14px;
+}
+.icon__erro{
+    margin-right: 5px;
+    font-size: 16px;
+}
