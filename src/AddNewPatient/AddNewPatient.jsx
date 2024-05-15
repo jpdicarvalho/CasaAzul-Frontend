@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import './AddNewPatient.css'
 import { IoCaretBackCircleOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 const AddNewPatient = () =>{
@@ -11,7 +11,7 @@ const navigateToPaciente = (paciente) => {
     navigate("/Paciente", {state: {paciente}});
 };
 
-const [newName, setNewName] = useState('');
+const [newName, setNewName] = useState(null);
 const [newDateBirth, setNewDateBirth] = useState('');
 const [newCEP, setNewCEP] = useState('');
 const [newStreet, setNewStreet] = useState('');
@@ -22,8 +22,34 @@ const [newDateCreation, setNewDateCreation] = useState('');
 const [newLaudo, setNewLaudo] = useState('');
 const [newCID, setNewCID] = useState('');
 
+const objectPatient =[
+    newName,
+    newDateBirth,
+    newCEP,
+    newStreet,
+    newNumber,
+    newBairro,
+    newCity,
+    newDateCreation,
+    newLaudo,
+    newCID
+]
 
-console.log(newName, newDateBirth)
+function validationForm (objectPatient) {
+    for(let i=0; i < objectPatient.length; i++){
+        if(!objectPatient[i]){
+            return false
+        }
+    }
+}
+const isValidated = validationForm(objectPatient)
+
+const createNewPatient = () =>{
+    if(isValidated != false){
+        console.log("deu certo");
+    }
+    
+}
     return(
         <div className="container__form">
             <div className='main__form'>
@@ -73,13 +99,13 @@ console.log(newName, newDateBirth)
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Laudo</label>
-                            <input type="text" className='input__inner'/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewLaudo(e.target.value)}}/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">CID</label>
                             <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}}/>
                         </div>
-                        <button className='Btn_cadastrar'>
+                        <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={createNewPatient}>
                             Cadastrar
                         </button>
                     </div>

@@ -53,4 +53,17 @@ label{
     font-size: 16px;
     color: blue;
     border-radius: 5px;
+    transition: 0.5s;
+}
+.Skilled__button{
+    background: blue;
+    border: 1px solid blue;
+    height: 45px;
+    width: 415px;
+    margin-top: 30px;
+    margin-left: 15px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 5px;
+    transition: 0.5s;
 }
