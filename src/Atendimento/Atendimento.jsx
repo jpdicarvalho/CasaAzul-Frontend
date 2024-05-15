@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import './Atendimento.css'
-import logoCasaAzul from './logo-casaAzul.png'
+import logoCasaAzul from '../logo-casaAzul.png'
 
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { PiUsers } from "react-icons/pi";
@@ -23,13 +23,19 @@ const location = useLocation();
 const { atendimento } = location.state;
 
 //passando os dados da barbearia selecionada
-const navigateToAddNewPatient = () => {
-    navigate("/AddNewPatient");
+const navigateToAddNewAtendimento = () => {
+    navigate("/AddNewAtendimento");
 };
 const navigateToPaciente = (paciente) => {
     navigate("/Paciente", {state: {paciente}});
 };
-console.log(atendimento)
+
+const navigateToColaboradores = (colaboradores) => {
+    navigate("/Colaboradores", {state: {colaboradores}});
+};
+const navigateToRelatorios = (relatorios) => {
+    navigate("/Relatorios", {state: {relatorios}});
+};
 
 
     return(
@@ -53,18 +59,23 @@ console.log(atendimento)
                 <Link className={`name__menu ${atendimento ? 'selected':''}`}>
                     <IoGitNetworkOutline className='icon__menu'/> Atendimento
                 </Link>
-                <Link className='name__menu'>
-                    <PiUsers className='icon__menu'/> Colaboradores
-                </Link>
+                <div onClick={() => navigateToColaboradores("colaboradores")}>
+                    <Link className='name__menu' >
+                        <PiUsers className='icon__menu'/> Colaboradores
+                    </Link>
+                </div>
+                
                 <div onClick={() => navigateToPaciente("paciente")}>
                     <Link className='name__menu'>
                         <LiaUserSolid className='icon__menu'/> Pacientes
                     </Link>
                 </div>
                 
-                <Link className="name__menu">
-                    <HiOutlineDocumentReport className='icon__menu'/> Relatórios
-                </Link>
+                <div onClick={() => navigateToRelatorios("relatorios")}>
+                    <Link className="name__menu">
+                        <HiOutlineDocumentReport className='icon__menu'/> Relatórios
+                    </Link>
+                </div>
                 <Link className='name__menu'>
                     <CiSettings className='icon__menu'/> Configuraçõe
                 </Link>
@@ -82,17 +93,12 @@ console.log(atendimento)
                     <div className="tittle__information">
                         Atendimentos
                     </div>
-                    <button className='add__paciente' onClick={navigateToAddNewPatient}>
+                    <button className='add__paciente' onClick={navigateToAddNewAtendimento}>
                         Criar atendimento
                     </button>
                 </div>
                 <div className="container__tittle__table">
-                    <p>Nome</p>
-                    <p>Data de nascimento</p>
-                    <p>Endereço</p>
-                    <p>Data de inscrição</p>
-                    <p>Laudo</p>
-                    <p>CID</p>
+                    teste
                 </div>
             </div>
         </div>

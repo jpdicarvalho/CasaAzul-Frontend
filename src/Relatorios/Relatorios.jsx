@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-import './Paciente.css'
+import './Relatorios.css'
 import logoCasaAzul from '../logo-casaAzul.png'
 
 import { HiOutlineDocumentReport } from "react-icons/hi";
@@ -15,17 +15,10 @@ import { IoGitNetworkOutline } from "react-icons/io5";
 
 
 
-const Paciente = () =>{
+const Relatorios = () =>{
 
 const navigate = useNavigate();
-const location = useLocation();
 
-const { paciente } = location.state;
-
-//passando os dados da barbearia selecionada
-const navigateToAddNewPatient = () => {
-    navigate("/AddNewPatient");
-};
 
 const navigateToAtendimento = (atendimento) => {
     navigate("/Atendimento", {state: {atendimento}});
@@ -33,9 +26,10 @@ const navigateToAtendimento = (atendimento) => {
 const navigateToColaboradores = (colaboradores) => {
     navigate("/Colaboradores", {state: {colaboradores}});
 };
-const navigateToRelatorios = (relatorios) => {
-    navigate("/Relatorios", {state: {relatorios}});
+const navigateToPaciente = (paciente) => {
+    navigate("/Paciente", {state: {paciente}});
 };
+
 
     return(
         <div className="main">
@@ -65,16 +59,15 @@ const navigateToRelatorios = (relatorios) => {
                         <PiUsers className='icon__menu'/> Colaboradores
                     </Link>
                 </div>
-                
-                <Link className={`name__menu ${paciente ? 'selected':''}`}>
-                    <LiaUserSolid className='icon__menu'/> Pacientes
-                </Link>
-                <div onClick={() => navigateToRelatorios("relatorios")}>
+                <div onClick={() => navigateToPaciente("paciente")}>
                     <Link className="name__menu">
-                        <HiOutlineDocumentReport className='icon__menu'/> Relatórios
+                        <LiaUserSolid className='icon__menu'/> Pacientes
                     </Link>
                 </div>
                 
+                <Link className="name__menu selected">
+                    <HiOutlineDocumentReport className='icon__menu'/> Relatórios
+                </Link>
                 <Link className='name__menu'>
                     <CiSettings className='icon__menu'/> Configuraçõe
                 </Link>
@@ -90,10 +83,10 @@ const navigateToRelatorios = (relatorios) => {
                 </div>
                 <div className="container__addPaciente">
                     <div className="tittle__information">
-                        Pacientes
+                        Relatórios
                     </div>
-                    <button className='add__paciente' onClick={navigateToAddNewPatient}>
-                        Adicionar paciente
+                    <button className='add__paciente' >
+                        Gerar relatórios
                     </button>
                 </div>
                 <div className="container__tittle__table">
@@ -110,4 +103,4 @@ const navigateToRelatorios = (relatorios) => {
         
     )
 };
-export default Paciente;
+export default Relatorios;
