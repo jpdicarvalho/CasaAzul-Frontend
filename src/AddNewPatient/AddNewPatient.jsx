@@ -27,7 +27,7 @@ const [newCID, setNewCID] = useState('');
 const [message, setMessage] = useState('');
 
 
-const objectPatient =[
+const objectPatient ={
     newName,
     newDateBirth,
     newCEP,
@@ -38,7 +38,7 @@ const objectPatient =[
     newDateCreation,
     hasLaudo,
     newCID
-]
+}
 
 function validationForm (objectPatient) {
     for(let i=0; i < objectPatient.length; i++){
@@ -48,10 +48,10 @@ function validationForm (objectPatient) {
     }
 }
 const isValidated = validationForm(objectPatient)
-console.log(hasLaudo)
+
 const createNewPatient = () =>{
     if(isValidated != false){
-        axios.post('http://localhost:8000/api/AddNewPatient', objectPatient)
+        axios.post('http://localhost:8000/api/AddNewPatient/', objectPatient)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessage("Paciente cadastrado com sucesso!")
@@ -121,8 +121,8 @@ const createNewPatient = () =>{
                                 <input 
                                     type="checkbox"  
                                     className='input__inner'
-                                    checked={hasLaudo}
-                                    onChange={(e) => {setHasLaudo(e.target.checked)}} // Define o estado como true se marcado, false se não marcado
+                                    checked={hasLaudo === 'Sim'}
+                                    onChange={(e) => {setHasLaudo('Sim')}} // Define o estado como true se marcado, false se não marcado
                                 />
                                 Sim
                             </label>
@@ -131,13 +131,13 @@ const createNewPatient = () =>{
                                 <input 
                                     type="checkbox"  
                                     className='input__inner'
-                                    checked={!hasLaudo}
-                                    onChange={(e) => {setHasLaudo(!e.target.checked), setNewCID("não consta")}} // Define o estado como false se marcado, true se não marcado
+                                    checked={hasLaudo === 'Não'}
+                                    onChange={(e) => {setHasLaudo('Não'), setNewCID('não')}} // Define o estado como false se marcado, true se não marcado
                                 />
                                 Não
                             </label>
                         </div>
-                        {hasLaudo &&(
+                        {hasLaudo === 'Sim' &&(
                             <div className="Input__box">
                                 <label htmlFor="">CID</label>
                                 <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}}/>
