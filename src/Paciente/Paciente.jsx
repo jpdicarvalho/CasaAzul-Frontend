@@ -22,9 +22,7 @@ import axios from 'axios';
 const Paciente = () =>{
 
 const navigate = useNavigate();
-const location = useLocation();
 
-const { paciente } = location.state;
 const [pacientes, setPacientes] = useState([]);
 
 //passando os dados da barbearia selecionada
@@ -32,14 +30,14 @@ const navigateToAddNewPatient = () => {
     navigate("/AddNewPatient");
 };
 
-const navigateToAtendimento = (atendimento) => {
-    navigate("/Atendimento", {state: {atendimento}});
+const navigateToAtendimento = () => {
+    navigate("/Atendimento");
 };
-const navigateToColaboradores = (colaboradores) => {
-    navigate("/Colaboradores", {state: {colaboradores}});
+const navigateToColaboradores = () => {
+    navigate("/Colaboradores");
 };
-const navigateToRelatorios = (relatorios) => {
-    navigate("/Relatorios", {state: {relatorios}});
+const navigateToRelatorios = () => {
+    navigate("/Relatorios");
 };
 
 const getAllPatients = () =>{
@@ -53,7 +51,7 @@ const getAllPatients = () =>{
 useEffect(() =>{
     getAllPatients()
 }, [])
-console.log(pacientes)
+
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -72,21 +70,21 @@ console.log(pacientes)
                 </div>
             </div>
             <div className="container__menus">
-                <div onClick={() => navigateToAtendimento("atendimento")}>
+                <div onClick={() => navigateToAtendimento()}>
                     <Link className='name__menu' >
                         <IoGitNetworkOutline className='icon__menu'/> Atendimento
                     </Link>
                 </div>
-                <div onClick={() => navigateToColaboradores("colaboradores")}>
+                <div onClick={() => navigateToColaboradores()}>
                     <Link className='name__menu'>
                         <PiUsers className='icon__menu'/> Colaboradores
                     </Link>
                 </div>
                 
-                <Link className={`name__menu ${paciente ? 'selected':''}`}>
+                <Link className="selected">
                     <LiaUserSolid className='icon__menu'/> Pacientes
                 </Link>
-                <div onClick={() => navigateToRelatorios("relatorios")}>
+                <div onClick={() => navigateToRelatorios()}>
                     <Link className="name__menu">
                         <HiOutlineDocumentReport className='icon__menu'/> Relatórios
                     </Link>

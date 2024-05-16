@@ -18,23 +18,20 @@ import { IoGitNetworkOutline } from "react-icons/io5";
 const Atendimento = () =>{
 
 const navigate = useNavigate();
-const location = useLocation();
-
-const { atendimento } = location.state;
 
 //passando os dados da barbearia selecionada
 const navigateToAddNewAtendimento = () => {
     navigate("/AddNewAtendimento");
 };
-const navigateToPaciente = (paciente) => {
-    navigate("/Paciente", {state: {paciente}});
+const navigateToPaciente = () => {
+    navigate("/Paciente");
 };
 
-const navigateToColaboradores = (colaboradores) => {
-    navigate("/Colaboradores", {state: {colaboradores}});
+const navigateToColaboradores = () => {
+    navigate("/Colaboradores");
 };
-const navigateToRelatorios = (relatorios) => {
-    navigate("/Relatorios", {state: {relatorios}});
+const navigateToRelatorios = () => {
+    navigate("/Relatorios");
 };
 
 
@@ -56,22 +53,22 @@ const navigateToRelatorios = (relatorios) => {
                 </div>
             </div>
             <div className="container__menus">
-                <Link className={`name__menu ${atendimento ? 'selected':''}`}>
+                <Link className="selected">
                     <IoGitNetworkOutline className='icon__menu'/> Atendimento
                 </Link>
-                <div onClick={() => navigateToColaboradores("colaboradores")}>
+                <div onClick={() => navigateToColaboradores()}>
                     <Link className='name__menu' >
                         <PiUsers className='icon__menu'/> Colaboradores
                     </Link>
                 </div>
                 
-                <div onClick={() => navigateToPaciente("paciente")}>
+                <div onClick={() => navigateToPaciente()}>
                     <Link className='name__menu'>
                         <LiaUserSolid className='icon__menu'/> Pacientes
                     </Link>
                 </div>
                 
-                <div onClick={() => navigateToRelatorios("relatorios")}>
+                <div onClick={() => navigateToRelatorios()}>
                     <Link className="name__menu">
                         <HiOutlineDocumentReport className='icon__menu'/> Relatórios
                     </Link>
