@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Colaboradores.css'
 import logoCasaAzul from '../logo-casaAzul.png'
@@ -10,8 +10,9 @@ import { PiUsers } from "react-icons/pi";
 import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
-import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { IoGitNetworkOutline } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
 
 import axios from 'axios';
 
@@ -109,12 +110,29 @@ console.log(colaboradores)
                     </button>
                 </div>
                 <div className="container__tittle__table">
-                    <p>Nome</p>
-                    <p>Data de nascimento</p>
-                    <p>Endereço</p>
-                    <p>Data de inscrição</p>
+                   <p className='pacient__inner'>Nome</p>
+                   <p className='pacient__inner'>Profissão</p>
+                   <p className='pacient__inner'>Inscrição</p>
+                   <p className='pacient__inner'>Está atendendo?</p>
+                   <p className='pacient__inner'>Observação</p>
 
                 </div>
+                {colaboradores.map((item) =>(
+                    <div key={item.id} className='conatiner__paciente'>
+                        <div className='pacient__box'>
+                            <p className='pacient__inner'>{item.name}</p>
+                            <p className='pacient__inner'>{item.profession}</p>
+                            <p className='pacient__inner'>{item.creation_date}</p>
+                            <p className='pacient__inner'>{item.situation}</p>
+                            <p className='pacient__inner'>{item.observation}</p>
+                            
+                            <p className='icon__patient'>
+                                <FaRegEdit />
+                                <MdDeleteOutline />
+                            </p>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
         

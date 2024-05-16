@@ -125,8 +125,11 @@ useEffect(() =>{
                             <p className='pacient__inner'>{item.registration_date}</p>
                             <p className='pacient__inner'>{item.laudo}</p>
                             <p className='pacient__inner'>{item.code_cid}</p>
-                            <p><FaRegEdit className='icon__patient'/></p>
-                            <p><MdDeleteOutline className='icon__patient'/></p>
+                            <p className='icon__patient'>
+                                <FaRegEdit />
+                                <MdDeleteOutline />
+                            </p>
+                            
                         </div>
                     </div>
                 ))}

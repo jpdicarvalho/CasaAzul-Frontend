@@ -125,6 +125,8 @@
     color: black;
     padding: 5px;
     padding-left: 12px;
+    max-width: 940px;
+
 }
 .add__paciente{
     height: 40px;
@@ -149,6 +151,7 @@
     color: #535050;
     font-weight: bold;
     padding-left: 20px;
+    margin-top: 20px;
 }
 .conatiner__paciente{
     display: flex;
@@ -161,7 +164,7 @@
     height: 60px;
     background:#fff;
     box-shadow: -3px 3px 7px 0px #00000030;
-    margin-right: 50px;
+    max-width: 940px;
 }
 .pacient__box{
     display: flex;
@@ -176,10 +179,14 @@
     margin: 5px;
 }
 .icon__patient{
-    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
     padding: 5px;
-    width: 30px;
-    height: 100%;
+    font-size: 20px;
+    height: 40px;
+    width: 100px;
     cursor: pointer;
     color: #0DB6D3;
 }
