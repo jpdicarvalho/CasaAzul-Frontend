@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom"
 import './AddNewPatient.css'
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { MdOutlineErrorOutline } from "react-icons/md";
+import { FaRegCheckCircle } from "react-icons/fa";
+
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -52,7 +54,7 @@ function validationForm (objectPatient) {
     }
 }
 const isValidated = validationForm(objectPatient)
-
+console.log(newDateCreation)
 const createNewPatient = () =>{
     if(isValidated != false){
         axios.post('http://localhost:8000/api/AddNewPatient/', objectPatient)
@@ -150,14 +152,15 @@ const createNewPatient = () =>{
                         
                         {message === "Paciente cadastrado com sucesso!" ? (
                             <div className="message__success">
-                                {message}
+                                <FaRegCheckCircle className="icon__message"/>{message}
                             </div>
                         ):(
                             <div className={` ${message ? 'message__erro' : ''}`}>
-                                <MdOutlineErrorOutline  className="icon__erro"/>{message}
+                                <MdOutlineErrorOutline  className="icon__message"/>{message}
                             </div>
                             
                         )}
+                        
                         <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={createNewPatient}>
                             Cadastrar
                         </button>

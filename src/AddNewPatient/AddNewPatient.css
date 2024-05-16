@@ -76,13 +76,25 @@ label{
     margin-right: 10px;
 }
 .message__success{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    max-width: 415px;
+    background: rgba(8, 212, 8, 0.861);
+    border: 1px solid #0f0;
+    background: 0f0;
+    color: #fff;
+    border-radius: 10px;
+    padding: 3px;
+    font-size: 14px;
 }
 .message__erro{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
-    max-width: 400px;
+    margin-left: 15px;
+    max-width: 415px;
     border: 1px solid red;
     background: rgba(255, 0, 0, 0.1);
     color: red;
@@ -90,7 +102,7 @@ label{
     padding: 3px;
     font-size: 14px;
 }
-.icon__erro{
+.icon__message{
     margin-right: 5px;
     font-size: 16px;
 }

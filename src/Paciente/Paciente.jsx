@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
@@ -12,6 +12,10 @@ import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { IoGitNetworkOutline } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
+
+import axios from 'axios';
 
 
 
@@ -21,6 +25,7 @@ const navigate = useNavigate();
 const location = useLocation();
 
 const { paciente } = location.state;
+const [pacientes, setPacientes] = useState([]);
 
 //passando os dados da barbearia selecionada
 const navigateToAddNewPatient = () => {
@@ -37,6 +42,18 @@ const navigateToRelatorios = (relatorios) => {
     navigate("/Relatorios", {state: {relatorios}});
 };
 
+const getAllPatients = () =>{
+    axios.get('http://localhost:8000/api/patients/')
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setPacientes(res.data.result);
+        }
+    }).catch(err => console.log("Erro ao buscar pacientes.", err))
+}
+useEffect(() =>{
+    getAllPatients()
+}, [])
+console.log(pacientes)
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -97,13 +114,26 @@ const navigateToRelatorios = (relatorios) => {
                     </button>
                 </div>
                 <div className="container__tittle__table">
-                    <p>Nome</p>
-                    <p>Data de nascimento</p>
-                    <p>Endereço</p>
-                    <p>Data de inscrição</p>
-                    <p>Laudo</p>
-                    <p>CID</p>
+                   <p className='pacient__inner'>Nome</p>
+                   <p className='pacient__inner'>Aniversário</p>
+                   <p className='pacient__inner'>Inscrição</p>
+                   <p className='pacient__inner'>Possuí laudo</p>
+                   <p className='pacient__inner'>CID</p>
+
                 </div>
+                {pacientes.map((item) =>(
+                    <div key={item.id} className='conatiner__paciente'>
+                        <div className='pacient__box'>
+                            <p className='pacient__inner'>{item.name}</p>
+                            <p className='pacient__inner'>{item.date_birth}</p>
+                            <p className='pacient__inner'>{item.registration_date}</p>
+                            <p className='pacient__inner'>{item.laudo}</p>
+                            <p className='pacient__inner'>{item.code_cid}</p>
+                            <p><FaRegEdit className='ico'/></p>
+                            <p><MdDeleteOutline /></p>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
         

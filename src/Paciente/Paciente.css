@@ -92,7 +92,7 @@
     margin-top: 100px;
 }
 .section__information{
-    background: #d8d7d730;
+    background: #8d888830;
     width: 100%;
 }
 .container__search{
@@ -135,9 +135,32 @@
 }
 .container__tittle__table{
     display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    padding-left: 10px;
+    flex-direction: row;
     color: #535050;
     font-weight: bold;
+    padding-left: 20px;
+}
+.conatiner__paciente{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 60px;
+    background:#fff;
+    box-shadow: -3px 3px 7px 0px #00000030;
+}
+.pacient__box{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    color: #535050;
+    font-size: 18px;
+    width: 100%;
+}
+.pacient__inner{
+    width: 150px;
+    margin: 5px;
 }
