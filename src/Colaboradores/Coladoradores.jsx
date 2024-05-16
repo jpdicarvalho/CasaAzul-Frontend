@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
@@ -12,6 +12,8 @@ import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { IoGitNetworkOutline } from "react-icons/io5";
+
+import axios from 'axios';
 
 
 
@@ -33,19 +35,20 @@ const navigateToPaciente = () => {
 const navigateToRelatorios = () => {
     navigate("/Relatorios");
 };
+const [colaboradores, setColaboradores] = useState([]);
 
 const getAllColaboradores = () =>{
     axios.get('http://localhost:8000/api/colaboradores/')
     .then(res =>{
         if(res.data.Success === "Success"){
-            setPacientes(res.data.result);
+            setColaboradores(res.data.resul);
         }
-    }).catch(err => console.log("Erro ao buscar pacientes.", err))
+    }).catch(err => console.log("Erro ao buscar colaboradores.", err))
 }
 useEffect(() =>{
     getAllColaboradores()
 }, [])
-
+console.log(colaboradores)
 
     return(
         <div className="main">
