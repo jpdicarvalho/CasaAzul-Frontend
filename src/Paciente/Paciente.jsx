@@ -102,9 +102,7 @@ console.log(pacientes)
                 
             </div>
             <div className="section__information">
-                <div className="container__search">
-                    <input type="search" className='inputSearch' placeholder='Pesquisar'/>
-                </div>
+                
                 <div className="container__addPaciente">
                     <div className="tittle__information">
                         Pacientes
@@ -129,8 +127,8 @@ console.log(pacientes)
                             <p className='pacient__inner'>{item.registration_date}</p>
                             <p className='pacient__inner'>{item.laudo}</p>
                             <p className='pacient__inner'>{item.code_cid}</p>
-                            <p><FaRegEdit className='ico'/></p>
-                            <p><MdDeleteOutline /></p>
+                            <p><FaRegEdit className='icon__patient'/></p>
+                            <p><MdDeleteOutline className='icon__patient'/></p>
                         </div>
                     </div>
                 ))}

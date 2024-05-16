@@ -24,7 +24,7 @@ const { colaboradores } = location.state;
 
 //passando os dados da barbearia selecionada
 const navigateToAddNewPatient = () => {
-    navigate("/AddNewPatient");
+    navigate("/AddNewColaborador");
 };
 
 const navigateToAtendimento = (atendimento) => {
@@ -87,9 +87,7 @@ const navigateToRelatorios = (relatorios) => {
                 
             </div>
             <div className="section__information">
-                <div className="container__search">
-                    <input type="search" className='inputSearch' placeholder='Pesquisar'/>
-                </div>
+                
                 <div className="container__addPaciente">
                     <div className="tittle__information">
                         Colaboradores

@@ -1,0 +1,7 @@
+.input__textarea{
+    padding: 5px;
+    border-radius: 5px;
+    height: 250px;
+    outline: none;
+    color: black;
+}

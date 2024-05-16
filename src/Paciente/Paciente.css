@@ -119,6 +119,7 @@
     justify-content: space-between;
     padding-left: 10px;
     margin-top: 20px;
+    margin-right: 50px;
     border-bottom: 1px solid #E5E5E5;
     font-size: 25px;
     color: black;
@@ -128,10 +129,19 @@
 .add__paciente{
     height: 40px;
     width: 200px;
+    color: blue;
+    border: 1px solid blue;
+    border-radius: 5px;
+    background: transparent;
+    transition: 0.5s;
+}
+.add__paciente:hover{
     color: #fff;
-    background: #1163B4;
-    border: none;
-    border-radius: 12px;
+    border: 1px solid blue;
+    background: blue;
+    transition: 0.5s;
+    border-radius: 10px;
+    cursor: pointer;
 }
 .container__tittle__table{
     display: flex;
@@ -151,6 +161,7 @@
     height: 60px;
     background:#fff;
     box-shadow: -3px 3px 7px 0px #00000030;
+    margin-right: 50px;
 }
 .pacient__box{
     display: flex;
@@ -163,4 +174,12 @@
 .pacient__inner{
     width: 150px;
     margin: 5px;
+}
+.icon__patient{
+    margin-right: 10px;
+    padding: 5px;
+    width: 30px;
+    height: 100%;
+    cursor: pointer;
+    color: #0DB6D3;
 }

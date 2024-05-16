@@ -5,6 +5,7 @@ import Atendimento from './Atendimento/Atendimento';
 import AddNewAtendimento from './AddNewAtendimento/AddNewAtendimento';
 import Colaboradores from './Colaboradores/Coladoradores';
 import Relatorios from './Relatorios/Relatorios';
+import AddNewColaborador from './AddNewColaborador/AddNewColaborador';
 
 function App() {
 
@@ -17,8 +18,8 @@ function App() {
         <Route path='/Colaboradores' element={<Colaboradores/>}/>
         <Route path='/Relatorios' element={<Relatorios/>}/>
         <Route path='/AddNewPatient' element={<AddNewPatient/>}/>
+        <Route path='/AddNewColaborador' element={<AddNewColaborador/>}/>
         <Route path='/AddNewAtendimento' element={<AddNewAtendimento/>}/>
-
 
       </Routes>
     </Router>
