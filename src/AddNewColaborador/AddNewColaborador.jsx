@@ -18,38 +18,53 @@ const navigateToColaboradores = (colaboradores) => {
 
 const [newName, setNewName] = useState(null);
 const [newProfession, setNewProfession] = useState('');
+const [newCPF, setNewCPF] = useState('');
 const [newDateCreation, setNewDateCreation] = useState('');
 const [isWorking, setIsworking] = useState('');
 const [newObservation, setNewObservation] = useState('');
+
 const [message, setMessage] = useState('');
 
-const date = new Date()
-const currentDate = new Date(date);
-const token = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}-${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
-const objectColaborador =[
+const valuesInputs =[
     newName,
     newProfession,
+    newCPF,
     newDateCreation,
     isWorking,
     newObservation
 ]
 
-function validationForm (objectColaborador) {
-    for(let i=0; i < objectColaborador.length; i++){
-        if(!objectColaborador[i]){
+function validationForm (valuesInputs) {
+    for(let i=0; i < valuesInputs.length; i++){
+        if(!valuesInputs[i]){
             return false
         }
     }
 }
-const isValidated = validationForm(objectColaborador)
+const isValidated = validationForm(valuesInputs)
 
 const createNewColaborador = () =>{
     if(isValidated != false){
+
+        const objectColaborador ={
+            newName,
+            newProfession,
+            newCPF,
+            newDateCreation,
+            isWorking,
+            newObservation
+        }
+
         axios.post('http://localhost:8000/api/AddNewColaborador/', objectColaborador)
         .then(res => {
-            if(res.data.Success === "Success"){
+            if(res.data.Message === "Success"){
                 setMessage("Colaborador cadastrado com sucesso!")
+                setTimeout(() => {
+                    setMessage(null);
+                  }, 2000);
+            }else{
+                setMessage("Já existe um colaborador com esse CPF cadastrado.")
                 setTimeout(() => {
                     setMessage(null);
                   }, 2000);
@@ -63,7 +78,6 @@ const createNewColaborador = () =>{
     }
     
 }
-console.log(objectColaborador)
 
     return(
         <div className="container__form">
@@ -86,6 +100,10 @@ console.log(objectColaborador)
                         <div className="Input__box">
                             <label htmlFor="">Profissão</label>
                             <input type="text" className='input__inner' onChange={(e) => {setNewProfession(e.target.value)}}/>
+                        </div>
+                        <div className="Input__box">
+                            <label htmlFor="">CPF</label>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewCPF(e.target.value)}}/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Data de inscrição</label>
@@ -119,6 +137,17 @@ console.log(objectColaborador)
                             <label htmlFor="">Observações</label>
                             <textarea type="text" className='input__textarea' onChange={(e) => {setNewObservation(e.target.value)}}/>
                         </div>
+
+                        {message === "Colaborador cadastrado com sucesso!" ? (
+                            <div className="message__success">
+                                <FaRegCheckCircle className="icon__message"/>{message}
+                            </div>
+                        ):(
+                            <div className={` ${message ? 'message__erro' : ''}`}>
+                                <MdOutlineErrorOutline  className="icon__message"/>{message}
+                            </div>
+                            
+                        )}
                         
                         <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={createNewColaborador}>
                             Cadastrar
