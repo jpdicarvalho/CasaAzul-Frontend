@@ -11,9 +11,49 @@
     padding: 5px;
     height: 40px;
 }
+.search{
+    width: 100%;
+}
 .ckecked__section{
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: row;
+}
+.conatiner__colaboradores{   
+    margin-top: 5px;
+}
+.container__search__colaborador{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.box_colaborador{
+    margin-bottom: 10px;
+    border: 2px solid #2d2d2fb1;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.colaborador__selected{
+    background: #3c3c3eb1;
+    color: #fff;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.Btn_buscar{
+    background: transparent;
+    border: 1px solid blue;
+    color: blue;
+    outline: none;
+    border-radius: 5px;
+    height: 40px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.Btn_buscar:hover{
+    background: blue;
+    color: #fff;
+    transition: 0.5s;
+
 }

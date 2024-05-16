@@ -12,21 +12,41 @@ const navigate = useNavigate();
 const navigateToAtendimento = (atendimento) => {
     navigate("/Atendimento", {state: {atendimento}});
 };
+
+const [SearchColaborador, setSearchColaborador] = useState('');
+const [SearchPaciente, setSearchPaciente] = useState('');
+
 const [colaboradores, setColaboradores] = useState([]);
+const [arrayColaborador, setArrayColaborador] = useState([]);
+const [colaboradoreId, setColaboradoreId] = useState('');
 
 const getAllColaboradores = () =>{
-    axios.get('http://localhost:8000/api/colaboradores/')
+    axios.get(`http://localhost:8000/api/get-colaboradores/${SearchColaborador}`)
     .then(res =>{
         if(res.data.Success === "Success"){
             setColaboradores(res.data.resul);
         }
     }).catch(err => console.log("Erro ao buscar colaboradores.", err))
 }
-useEffect(() =>{
-    getAllColaboradores()
-}, [])
-console.log(colaboradores)
-    return(
+const getAllPaciente = () =>{
+    axios.get(`http://localhost:8000/api/get-paciente/${SearchPaciente}`)
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setColaboradores(res.data.resul);
+        }
+    }).catch(err => console.log("Erro ao buscar colaboradores.", err))
+}
+
+const toggleItem = (itemId) => {
+    setColaboradoreId(itemId);
+    if (arrayColaborador.includes(itemId)) {
+        setArrayColaborador([]); // Remove o itemId do array, deixando o array vazio
+    } else {
+        setArrayColaborador([itemId]); // Adiciona apenas o itemId ao array
+    }
+};
+
+  return(
         <div className="container__form">
             <div className='main__form'>
                 <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToAtendimento("atendimento")}/>
@@ -60,7 +80,24 @@ console.log(colaboradores)
                     <div className="container__two">
                     <div className="Input__box">
                             <label style={{fontSize: '18px'}}>Responsável pelo atendimento</label>
-                            <input type="text" className='input__inner' placeholder="Buscar colaborador"/>
+                            <div className="container__search__colaborador">
+                                <input type="text" className='input__inner search' placeholder="Buscar..." onChange={(e) => {setSearchColaborador(e.target.value)}}/>
+                                {SearchColaborador &&(
+                                    <button className="Btn_buscar" onClick={getAllColaboradores}>Buscar</button>
+                                )}
+                            </div>
+                            
+
+                            <div className="conatiner__colaboradores">
+                                {colaboradores.map((item) =>(
+                                    <div key={item.id} className={`box_colaborador ${arrayColaborador.includes(item.id) ? 'colaborador__selected':''}`} onClick={() => toggleItem(item.id)}>
+                                        <div className="pacient__box" style={{color: '#2d2d2fb1'}}>
+                                            <p className='pacient__inner'>{item.name}</p>
+                                            <p className='pacient__inner'>{item.profession}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                         <div className="Input__box">
                             <label style={{fontSize: '18px'}}>Paciente a ser atendimento</label>
