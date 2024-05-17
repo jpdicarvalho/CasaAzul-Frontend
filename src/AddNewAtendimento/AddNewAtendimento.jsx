@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import './AddNewAtendimento.css'
 import { IoCaretBackCircleOutline } from "react-icons/io5";
+import { MdOutlineErrorOutline } from "react-icons/md";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 
 const AddNewAtendimento = () =>{
@@ -12,32 +14,104 @@ const navigate = useNavigate();
 const navigateToAtendimento = (atendimento) => {
     navigate("/Atendimento", {state: {atendimento}});
 };
+//====== Section get service =====
+const [services, setServices] = useState([]);
+const [serviceId, setServiceId] = useState([]);
+const [arrayService, setArrayService] = useState([]);
+const [messageService, setMessageService] = useState('');
 
-const [SearchColaborador, setSearchColaborador] = useState('');
+const getAllServices = () =>{
+    axios.get('http://localhost:8000/api/get-services/')
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setServices(res.data.resu);
+        }else{
+            setMessageService("Nenhum serviço encontrado.")
+        }
+    }).catch(err => console.log("Erro ao buscar serviço.", err))
+}
+useEffect(() =>{
+    getAllServices()
+}, [])
+
+const toggleItemService = (itemId) => {
+    setServiceId(itemId);
+    if (arrayService.includes(itemId)) {
+        setArrayService([]); // Remove o itemId do array, deixando o array vazio
+    } else {
+        setArrayService([itemId]); // Adiciona apenas o itemId ao array
+    }
+};
+
+//====== Section new Service =====
+const [newService, setNewService] = useState('');
+const [newDateService, setNewDateService] = useState('');
+const [messageNewService, setMessageNewService] = useState('');
+
+
+const createNewService = () =>{
+    axios.post(`http://localhost:8000/api/addNewService/${newService}`)
+    .then(res => {
+        if(res.data.Success === "Success"){
+            setMessageNewService('Novo tipo de atendimento cadastrado.')
+            setTimeout(() => {
+                setMessageNewService(null);
+              }, 2000);
+        }
+    }).catch(res => console.log('erro ao cadastrar atendimento'))
+}
+
+//====== Section paciente =====
 const [SearchPaciente, setSearchPaciente] = useState('');
+const [pacientes, setPacientes] = useState([]);
+const [pacienteId, setPacienteId] = useState('');
+const [arrayPacientes, setArrayPacientes] = useState([]);
+const [messagePaciente, setMessagePaciente] = useState('');
 
+
+const getAllPaciente = () =>{
+    axios.get(`http://localhost:8000/api/get-paciente/${SearchPaciente}`)
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setMessagePaciente('')
+            setPacientes(res.data.resul);
+        }else{
+            setPacientes([])
+            setMessagePaciente("Nenhum paciente encontrado.")
+        }
+    }).catch(err => console.log("Erro ao buscar pacientes.", err))
+}
+
+const toggleItemPaciente = (itemId) => {
+    setPacienteId(itemId);
+    if (arrayPacientes.includes(itemId)) {
+        setArrayPacientes([]); // Remove o itemId do array, deixando o array vazio
+    } else {
+        setArrayPacientes([itemId]); // Adiciona apenas o itemId ao array
+    }
+};
+//====== Section colaborador =====
+const [SearchColaborador, setSearchColaborador] = useState('');
 const [colaboradores, setColaboradores] = useState([]);
 const [arrayColaborador, setArrayColaborador] = useState([]);
 const [colaboradoreId, setColaboradoreId] = useState('');
+const [messageColaborador, setMessageColaborador] = useState('');
+
 
 const getAllColaboradores = () =>{
     axios.get(`http://localhost:8000/api/get-colaboradores/${SearchColaborador}`)
     .then(res =>{
         if(res.data.Success === "Success"){
+            setMessageColaborador('')
             setColaboradores(res.data.resul);
-        }
-    }).catch(err => console.log("Erro ao buscar colaboradores.", err))
-}
-const getAllPaciente = () =>{
-    axios.get(`http://localhost:8000/api/get-paciente/${SearchPaciente}`)
-    .then(res =>{
-        if(res.data.Success === "Success"){
-            setColaboradores(res.data.resul);
+        }else{
+            setColaboradores([])
+            setMessageColaborador("Nenhum colaborador encontrado.")
         }
     }).catch(err => console.log("Erro ao buscar colaboradores.", err))
 }
 
-const toggleItem = (itemId) => {
+const toggleItemColaborador = (itemId) => {
     setColaboradoreId(itemId);
     if (arrayColaborador.includes(itemId)) {
         setArrayColaborador([]); // Remove o itemId do array, deixando o array vazio
@@ -45,6 +119,7 @@ const toggleItem = (itemId) => {
         setArrayColaborador([itemId]); // Adiciona apenas o itemId ao array
     }
 };
+
 
   return(
         <div className="container__form">
@@ -57,23 +132,41 @@ const toggleItem = (itemId) => {
                 <div className="subtittle__form">
                     Preencha as informações necessárias para criar um novo atendimento
                 </div>
+                {messageNewService === "Novo tipo de atendimento cadastrado." ? (
+                        <div className="message__success">
+                            <FaRegCheckCircle className="icon__message"/>{messageNewService}
+                        </div>
+                    ):(
+                        <div className={` ${messageNewService ? 'message__erro' : ''}`}>
+                            <MdOutlineErrorOutline  className="icon__message"/>{messageNewService}
+                        </div>
+                                
+                    )}
                 <div className="container__inputs">
                     <div className="container__one">
-                        <label style={{marginLeft: '10px', fontSize: '18px'}}>Tipos de Atendimentos</label>
-                        <div className="Input__box ">
-                            <label className="ckecked__section">
-                                <input type="checkbox" className='input__inner'/>Psicológico/Psicoterapia
-                            </label>
-                            <label className="ckecked__section">
-                                <input type="checkbox" className='input__inner'/>Triagem
-                            </label>
-                            <label className="ckecked__section">
-                                <input type="checkbox" className='input__inner'/>Pedagógico
-                            </label>
-                        </div>
                         <div className="Input__box">
                             <label style={{fontSize: '18px'}}>Data do atendimento</label>
-                            <input type="date" className='input__inner'/>
+                            <input type="date" className='input__inner'onChange={(e) => {setNewDateService(e.target.value)}}/>
+                        </div>
+
+                        <label style={{fontSize: '18px', marginLeft: '10px'}}>Tipos de Atendimentos</label>
+                        <div className="container__search__colaborador "style={{marginLeft: '10px'}}>
+                            <input type="text" className='input__inner search' placeholder="Novo tipo de atendimento" onChange={(e) => {setNewService(e.target.value)}}/>
+                            {newService &&(
+                                <button className="Btn_buscar" onClick={createNewService}>Cadastrar</button>
+                            )}
+                            
+                        </div>
+                        {messageService === 'Nenhum serviço encontrado.' ?(
+                                    <div className='message_colaborador'>{messageService}</div>
+                                ):null}
+
+                        <div className="container__nameServices">
+                            {services.map((item) => (
+                                <div key={item.id} className={`name__service ${arrayService.includes(item.id) ? 'service__selected':''}`} onClick={() => toggleItemService(item.id)}>
+                                    <p>{item.name}</p>
+                                </div>
+                            ))}
                         </div>
                         
                     </div>
@@ -81,7 +174,7 @@ const toggleItem = (itemId) => {
                     <div className="Input__box">
                             <label style={{fontSize: '18px'}}>Responsável pelo atendimento</label>
                             <div className="container__search__colaborador">
-                                <input type="text" className='input__inner search' placeholder="Buscar..." onChange={(e) => {setSearchColaborador(e.target.value)}}/>
+                                <input type="text" className='input__inner search' placeholder="Buscar colaborador..." onChange={(e) => {setSearchColaborador(e.target.value)}}/>
                                 {SearchColaborador &&(
                                     <button className="Btn_buscar" onClick={getAllColaboradores}>Buscar</button>
                                 )}
@@ -89,8 +182,12 @@ const toggleItem = (itemId) => {
                             
 
                             <div className="conatiner__colaboradores">
+                                {messageColaborador === 'Nenhum colaborador encontrado.' ?(
+                                    <div className='message_colaborador'>{messageColaborador}</div>
+                                ):null}
+
                                 {colaboradores.map((item) =>(
-                                    <div key={item.id} className={`box_colaborador ${arrayColaborador.includes(item.id) ? 'colaborador__selected':''}`} onClick={() => toggleItem(item.id)}>
+                                    <div key={item.id} className={`box_colaborador ${arrayColaborador.includes(item.id) ? 'colaborador__selected':''}`} onClick={() => toggleItemColaborador(item.id)}>
                                         <div className="pacient__box" style={{color: '#2d2d2fb1'}}>
                                             <p className='pacient__inner'>{item.name}</p>
                                             <p className='pacient__inner'>{item.profession}</p>
@@ -101,7 +198,27 @@ const toggleItem = (itemId) => {
                         </div>
                         <div className="Input__box">
                             <label style={{fontSize: '18px'}}>Paciente a ser atendimento</label>
-                            <input type="text" className='input__inner' placeholder="Buscar paciente"/>
+                            <div className="container__search__colaborador">
+                                <input type="text" className='input__inner search' placeholder="Buscar paciente..." onChange={(e) => {setSearchPaciente(e.target.value)}}/>
+                                {SearchPaciente &&(
+                                        <button className="Btn_buscar" onClick={getAllPaciente}>Buscar</button>
+                                )}
+                            </div>
+                            <div className="conatiner__colaboradores">
+                                {messagePaciente === 'Nenhum paciente encontrado.' ?(
+                                    <div className='message_colaborador'>{messagePaciente}</div>
+                                ):null}
+
+                                {pacientes.map((item) =>(
+                                    <div key={item.id} className={`box_colaborador ${arrayPacientes.includes(item.id) ? 'colaborador__selected':''}`} onClick={() => toggleItemPaciente(item.id)}>
+                                        <div className="pacient__box" style={{color: '#2d2d2fb1'}}>
+                                            <p className='pacient__inner'>{item.name}</p>
+                                            <p className='pacient__inner'>{item.date_birth}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            
                         </div>
                         <button className='Btn_cadastrar'>
                             Cadastrar

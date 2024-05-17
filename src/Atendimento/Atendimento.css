@@ -57,3 +57,34 @@
     transition: 0.5s;
 
 }
+.message_colaborador{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3c3c3eb1;
+    font-size: 18px;
+}
+.container__nameServices{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 250px;
+    background: rgba(128, 128, 128, 0.498);
+    overflow-y: scroll;
+    overflow-x: hidden
+}
+.name__service{
+    margin-bottom: 10px;
+    font-size: 16px;
+    padding: 5px;
+    background: transparent;
+    color: #000;
+    border: 1px solid #000;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.service__selected{
+    background: #0000005f;
+}
