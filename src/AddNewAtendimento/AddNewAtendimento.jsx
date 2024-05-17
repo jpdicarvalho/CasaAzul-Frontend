@@ -32,7 +32,7 @@ const getAllServices = () =>{
 }
 useEffect(() =>{
     getAllServices()
-}, [])
+}, [newDateService, newService])
 
 const toggleItemService = (itemId) => {
     setServiceId(itemId);
