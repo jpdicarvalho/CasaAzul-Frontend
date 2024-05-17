@@ -29,7 +29,7 @@ const createNewService = () =>{
                 setMessageNewService(null);
               }, 2000);
         }
-    }).catch(res => console.log('erro ao cadastrar atendimento'))
+    }).catch(err => console.log('erro ao cadastrar atendimento', err))
 }
 
 //====== Get All services ======
@@ -127,14 +127,29 @@ const toggleItemColaborador = (itemId) => {
 };
 
 //===== Section create a new atendimento =====
-const valuesNewAtendimento = [
-    newDateService,
-    serviceId,
-    colaboradoreId,
-    pacienteId
-]
+const [messageNewAtendimento, setMessageNewAtendimento] = useState('');
+
 const isInputsValied = newDateService && serviceId && colaboradoreId && pacienteId;
 
+const creatNewAtendimento = () =>{
+    if(isInputsValied){
+        const valuesNewAtendimento = {
+            newDateService,
+            serviceId,
+            colaboradoreId,
+            pacienteId
+        }
+        axios.post('http://localhost:8000/api/addNewAtendimento/', valuesNewAtendimento)
+        .then(res => {
+            if(res.data.Success === "Success"){
+                setMessageNewAtendimento('Novo atendimento cadastrado.')
+                setTimeout(() => {
+                    setMessageNewAtendimento(null);
+                }, 2000);
+            }
+        }).catch(err => console.log('erro ao cadastrar atendimento', err))
+    }
+}
   return(
         <div className="container__form">
             <div className='main__form'>
@@ -234,7 +249,7 @@ const isInputsValied = newDateService && serviceId && colaboradoreId && paciente
                             </div>
                             
                         </div>
-                        <button className={`Btn_cadastrar ${isInputsValied ? 'Skilled__button':''}`}>
+                        <button className={`Btn_cadastrar ${isInputsValied ? 'Skilled__button':''}`} onClick={creatNewAtendimento}>
                             Cadastrar
                         </button>
                     </div>
