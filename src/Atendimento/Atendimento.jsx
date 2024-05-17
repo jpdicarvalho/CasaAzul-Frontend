@@ -47,10 +47,12 @@ useEffect(() =>{
     getAllAtendimento()
 }, [])
 //===== Section Finalizar atendimento =====
-
+const [teste, setteste] = useState([]);
 const finalizarAtendimento = (atendimento_id) => {
-
+console.log(atendimento_id)
+    
 }
+console.log(atendimentos)
 
     return(
         <div className="main">
@@ -117,7 +119,7 @@ const finalizarAtendimento = (atendimento_id) => {
                    <p className='pacient__inner'>Status</p>
                 </div>
                 {atendimentos.map((item) =>(
-                    <div key={item.id} className='conatiner__paciente'>
+                    <div key={item.service_id} className='conatiner__paciente' >
                         <div className='pacient__box'>
                             <p className='pacient__inner'>{item.paciente_name}</p>
                             <p className='pacient__inner'>{item.service_name}</p>
@@ -125,7 +127,7 @@ const finalizarAtendimento = (atendimento_id) => {
                             <p className='pacient__inner'>{item.date_service}</p>
                             <p className='pacient__inner'>{item.status}</p>
                             <p className='icon__patient'>
-                            <button className='add__paciente' onClick={finalizarAtendimento(item.id)}>
+                            <button className='add__paciente' onClick={() => finalizarAtendimento(item.service_id)}>
                                 Finalizar atendimento
                             </button>
                             </p>
