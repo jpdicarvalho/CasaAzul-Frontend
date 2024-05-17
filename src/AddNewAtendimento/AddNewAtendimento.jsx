@@ -148,6 +148,8 @@ const creatNewAtendimento = () =>{
                 }, 2000);
             }
         }).catch(err => console.log('erro ao cadastrar atendimento', err))
+    }else{
+        setMessageNewAtendimento('Preencha todos os campos.')
     }
 }
   return(
@@ -249,6 +251,16 @@ const creatNewAtendimento = () =>{
                             </div>
                             
                         </div>
+                        {messageNewAtendimento === "Novo atendimento cadastrado." ? (
+                            <div className="message__success">
+                                <FaRegCheckCircle className="icon__message"/>{messageNewAtendimento}
+                            </div>
+                        ):(
+                            <div className={` ${messageNewAtendimento ? 'message__erro' : ''}`}>
+                                <MdOutlineErrorOutline  className="icon__message"/>{messageNewAtendimento}
+                            </div>
+                            
+                        )}
                         <button className={`Btn_cadastrar ${isInputsValied ? 'Skilled__button':''}`} onClick={creatNewAtendimento}>
                             Cadastrar
                         </button>
