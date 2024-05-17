@@ -14,9 +14,28 @@ const navigate = useNavigate();
 const navigateToAtendimento = (atendimento) => {
     navigate("/Atendimento", {state: {atendimento}});
 };
-//====== Section get service =====
+
+//====== Section new Service =====
+const [newService, setNewService] = useState('');
+const [messageNewService, setMessageNewService] = useState('');
+
+
+const createNewService = () =>{
+    axios.post(`http://localhost:8000/api/addNewService/${newService}`)
+    .then(res => {
+        if(res.data.Success === "Success"){
+            setMessageNewService('Novo tipo de atendimento cadastrado.')
+            setTimeout(() => {
+                setMessageNewService(null);
+              }, 2000);
+        }
+    }).catch(res => console.log('erro ao cadastrar atendimento'))
+}
+
+//====== Get All services ======
+const [newDateService, setNewDateService] = useState('');
 const [services, setServices] = useState([]);
-const [serviceId, setServiceId] = useState([]);
+const [serviceId, setServiceId] = useState('');
 const [arrayService, setArrayService] = useState([]);
 const [messageService, setMessageService] = useState('');
 
@@ -38,28 +57,12 @@ const toggleItemService = (itemId) => {
     setServiceId(itemId);
     if (arrayService.includes(itemId)) {
         setArrayService([]); // Remove o itemId do array, deixando o array vazio
+        setServiceId('');
+
     } else {
         setArrayService([itemId]); // Adiciona apenas o itemId ao array
     }
 };
-
-//====== Section new Service =====
-const [newService, setNewService] = useState('');
-const [newDateService, setNewDateService] = useState('');
-const [messageNewService, setMessageNewService] = useState('');
-
-
-const createNewService = () =>{
-    axios.post(`http://localhost:8000/api/addNewService/${newService}`)
-    .then(res => {
-        if(res.data.Success === "Success"){
-            setMessageNewService('Novo tipo de atendimento cadastrado.')
-            setTimeout(() => {
-                setMessageNewService(null);
-              }, 2000);
-        }
-    }).catch(res => console.log('erro ao cadastrar atendimento'))
-}
 
 //====== Section paciente =====
 const [SearchPaciente, setSearchPaciente] = useState('');
@@ -86,17 +89,19 @@ const toggleItemPaciente = (itemId) => {
     setPacienteId(itemId);
     if (arrayPacientes.includes(itemId)) {
         setArrayPacientes([]); // Remove o itemId do array, deixando o array vazio
+        setPacienteId('');
+
     } else {
         setArrayPacientes([itemId]); // Adiciona apenas o itemId ao array
     }
 };
+
 //====== Section colaborador =====
 const [SearchColaborador, setSearchColaborador] = useState('');
 const [colaboradores, setColaboradores] = useState([]);
 const [arrayColaborador, setArrayColaborador] = useState([]);
 const [colaboradoreId, setColaboradoreId] = useState('');
 const [messageColaborador, setMessageColaborador] = useState('');
-
 
 const getAllColaboradores = () =>{
     axios.get(`http://localhost:8000/api/get-colaboradores/${SearchColaborador}`)
@@ -115,11 +120,20 @@ const toggleItemColaborador = (itemId) => {
     setColaboradoreId(itemId);
     if (arrayColaborador.includes(itemId)) {
         setArrayColaborador([]); // Remove o itemId do array, deixando o array vazio
+        setColaboradoreId('');
     } else {
         setArrayColaborador([itemId]); // Adiciona apenas o itemId ao array
     }
 };
 
+//===== Section create a new atendimento =====
+const valuesNewAtendimento = [
+    newDateService,
+    serviceId,
+    colaboradoreId,
+    pacienteId
+]
+const isInputsValied = newDateService && serviceId && colaboradoreId && pacienteId;
 
   return(
         <div className="container__form">
@@ -220,7 +234,7 @@ const toggleItemColaborador = (itemId) => {
                             </div>
                             
                         </div>
-                        <button className='Btn_cadastrar'>
+                        <button className={`Btn_cadastrar ${isInputsValied ? 'Skilled__button':''}`}>
                             Cadastrar
                         </button>
                     </div>
