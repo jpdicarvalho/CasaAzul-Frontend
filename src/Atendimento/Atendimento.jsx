@@ -1,5 +1,5 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import './Atendimento.css'
@@ -10,9 +10,9 @@ import { PiUsers } from "react-icons/pi";
 import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
-import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { IoGitNetworkOutline } from "react-icons/io5";
-
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
 
 
 const Atendimento = () =>{
@@ -34,6 +34,23 @@ const navigateToRelatorios = () => {
     navigate("/Relatorios");
 };
 
+const [atendimentos, setAtendimentos] = useState([]);
+const getAllAtendimento = () =>{
+    axios.get('http://localhost:8000/api/atendimentos/')
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setAtendimentos(res.data.resu);
+        }
+    }).catch(err => console.log("Erro ao buscar atendimentos.", err))
+}
+useEffect(() =>{
+    getAllAtendimento()
+}, [])
+//===== Section Finalizar atendimento =====
+
+const finalizarAtendimento = (atendimento_id) => {
+
+}
 
     return(
         <div className="main">
@@ -83,20 +100,39 @@ const navigateToRelatorios = () => {
                 
             </div>
             <div className="section__information">
-                <div className="container__search">
-                    <input type="search" className='inputSearch' placeholder='Pesquisar'/>
-                </div>
+                
                 <div className="container__addPaciente">
                     <div className="tittle__information">
-                        Atendimentos
+                        Atendimentos em aberto
                     </div>
                     <button className='add__paciente' onClick={navigateToAddNewAtendimento}>
                         Criar atendimento
                     </button>
                 </div>
                 <div className="container__tittle__table">
-                    teste
+                   <p className='pacient__inner'>Paciente</p>
+                   <p className='pacient__inner'>Atendimento</p>
+                   <p className='pacient__inner'>Colaborador</p>
+                   <p className='pacient__inner'>Data de criação</p>
+                   <p className='pacient__inner'>Status</p>
                 </div>
+                {atendimentos.map((item) =>(
+                    <div key={item.id} className='conatiner__paciente'>
+                        <div className='pacient__box'>
+                            <p className='pacient__inner'>{item.paciente_name}</p>
+                            <p className='pacient__inner'>{item.service_name}</p>
+                            <p className='pacient__inner'>{item.profissional_name}</p>
+                            <p className='pacient__inner'>{item.date_service}</p>
+                            <p className='pacient__inner'>{item.status}</p>
+                            <p className='icon__patient'>
+                            <button className='add__paciente' onClick={finalizarAtendimento(item.id)}>
+                                Finalizar atendimento
+                            </button>
+                            </p>
+                            
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
         
