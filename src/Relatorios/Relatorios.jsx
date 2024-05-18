@@ -47,6 +47,7 @@ const getAllPacientes = () =>{
     }).catch(err => console.log("Erro ao buscar colaboradores.", err))
 }
 console.log(SearchPaciente)
+console.log(pacientes)
 
     return(
         <div className="main">
