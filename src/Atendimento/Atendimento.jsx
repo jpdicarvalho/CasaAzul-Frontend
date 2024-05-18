@@ -134,7 +134,7 @@ useEffect(() =>{
                 
                 <div className="container__addPaciente">
                     <div className="tittle__information">
-                        Atendimentos em aberto
+                        Atendimentos
                     </div>
                     <button className='add__paciente' onClick={navigateToAddNewAtendimento}>
                         Criar atendimento

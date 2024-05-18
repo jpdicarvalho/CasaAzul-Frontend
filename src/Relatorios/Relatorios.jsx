@@ -29,7 +29,24 @@ const navigateToColaboradores = (colaboradores) => {
 const navigateToPaciente = (paciente) => {
     navigate("/Paciente", {state: {paciente}});
 };
+const [SearchPaciente, setSearchSearchPaciente] = useState('');
+const [pacientes, setPacientes] = useState([]);
+const [messagePacientes, setMessagePacientes] = useState('');
 
+
+const getAllPacientes = () =>{
+    axios.get(`http://localhost:8000/api/get-pacientes/${SearchPaciente}`)
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setMessagePacientes('')
+            setPacientes(res.data.resul);
+        }else{
+            setPacientes([])
+            setMessagePacientes("Nenhum paciente encontrado.")
+        }
+    }).catch(err => console.log("Erro ao buscar colaboradores.", err))
+}
+console.log(SearchPaciente)
 
     return(
         <div className="main">
@@ -89,14 +106,29 @@ const navigateToPaciente = (paciente) => {
                         Gerar relatórios
                     </button>
                 </div>
-                <div className="container__tittle__table">
-                    <p>Nome</p>
-                    <p>Data de nascimento</p>
-                    <p>Endereço</p>
-                    <p>Data de inscrição</p>
-                    <p>Laudo</p>
-                    <p>CID</p>
+            <div className="section__inputs__search">
+                
+                <div className="container__tittle_and_input">
+                   <p className='tittle__table__inner'>Nome do paciente</p>
+                   <input type="text" className='input__inner' placeholder='Buscar paciente' onChange={(e) => {setSearchSearchPaciente(e.target.value)}}/>
+                   {SearchPaciente &&(
+                        <button className="Btn_buscar" onClick={getAllPacientes}>Buscar</button>
+                    )}
                 </div>
+                <div className="container__tittle_and_input">
+                    <p className='tittle__table__inner'>Tipo do atendimento</p>
+                   <input type="text" className='input__inner' placeholder='Buscar tipo de atendimento'/>
+                </div>
+                <div className="container__tittle_and_input">
+                    <p className='tittle__table__inner'>Data inicial</p>
+                   <input type="date" className='input__inner'/>
+                </div>
+                <div className="container__tittle_and_input">
+                    <p className='tittle__table__inner'>Data final</p>
+                   <input type="date" className='input__inner'/>
+                </div>
+
+            </div>
             </div>
         </div>
         
