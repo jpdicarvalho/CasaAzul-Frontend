@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -30,6 +30,8 @@ const navigateToColaboradores = () => {
 const navigateToPaciente = () => {
     navigate("/Paciente");
 };
+
+//===== Section get data paciente =====
 const [SearchPaciente, setSearchSearchPaciente] = useState('');
 const [pacientes, setPacientes] = useState([]);
 const [namePaciente, setNamePaciente] = useState('');
@@ -37,7 +39,6 @@ const [pacienteId, setPacienteId] = useState('');
 const [hiddenDivPaciente, setHiddenDivPaciente] = useState(false);
 const [messagePacientes, setMessagePacientes] = useState('');
 
-//===== Section get data paciente =====
 const getAllPacientes = () =>{
     axios.get(`http://localhost:8000/api/get-pacientes/${SearchPaciente}`)
     .then(res =>{
@@ -58,8 +59,42 @@ const getDataPaciente = (paciente_id, name_paciente) =>{
     setHiddenDivPaciente(true)
     setSearchSearchPaciente('')
 }
+//===== Section get type service =====
+const [SearchTypeService, setSearchTypeService] = useState('');
+const [services, setServices] = useState([]);
+const [nameService, setNameService] = useState('');
+const [serviceId, setServiceId] = useState('');
+const [hiddenDivService, setHiddenDivService] = useState(false);
 
+const getAllServices = () =>{
+    axios.get('http://localhost:8000/api/get-services/')
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setHiddenDivService(false)
+            setServices(res.data.resu);
+        }else{
+            setMessageService("Nenhum serviço encontrado.")
+        }
+    }).catch(err => console.log("Erro ao buscar serviço.", err))
+}
+useEffect(() =>{
+    getAllServices()
+}, [SearchTypeService])
 
+// Convertendo o valor do search para minúsculo
+const searchLowerCase = SearchTypeService.toLowerCase();
+
+// Buscando Barbearia pelo input Search
+const serviceSearch = services.filter((service) =>
+    service.name.toLowerCase().includes(searchLowerCase)
+);
+
+const getDataTypeService = (paciente_id, name_paciente) =>{
+    setServiceId(paciente_id)
+    setNameService(name_paciente)
+    setHiddenDivService(true)
+    setSearchTypeService('')
+}
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -142,7 +177,14 @@ const getDataPaciente = (paciente_id, name_paciente) =>{
                 
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Tipo do atendimento</p>
-                   <input type="text" className='input__inner' placeholder='Buscar tipo de atendimento'/>
+                   <input type="text" className='input__inner' value={SearchTypeService} placeholder={nameService ? nameService:'Buscar tipo de atendimento'} onChange={(e) => {setSearchTypeService(e.target.value)}}/>
+                   {SearchTypeService &&(
+                        serviceSearch.map((item) =>(
+                            <div key={item.id} className={`Box__paciente__found ${hiddenDivService ? 'hiddenBtn':''}`} onClick={() => getDataTypeService(item.id, item.name)}>
+                                <p >{item.name}</p>
+                            </div>
+                        ))
+                    )}
                 </div>
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Data inicial</p>

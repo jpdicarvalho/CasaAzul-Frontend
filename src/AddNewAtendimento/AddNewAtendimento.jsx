@@ -26,6 +26,7 @@ const createNewService = () =>{
         if(res.data.Success === "Success"){
             setMessageNewService('Novo tipo de atendimento cadastrado.')
             setTimeout(() => {
+                getAllServices()
                 setMessageNewService(null);
               }, 2000);
         }
@@ -51,7 +52,7 @@ const getAllServices = () =>{
 }
 useEffect(() =>{
     getAllServices()
-}, [newDateService, newService])
+}, [messageService, newDateService, newService])
 
 const toggleItemService = (itemId) => {
     setServiceId(itemId);
