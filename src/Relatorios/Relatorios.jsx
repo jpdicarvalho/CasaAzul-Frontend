@@ -37,12 +37,13 @@ const [pacienteId, setPacienteId] = useState('');
 const [hiddenDivPaciente, setHiddenDivPaciente] = useState(false);
 const [messagePacientes, setMessagePacientes] = useState('');
 
-
+//===== Section get data paciente =====
 const getAllPacientes = () =>{
     axios.get(`http://localhost:8000/api/get-pacientes/${SearchPaciente}`)
     .then(res =>{
         if(res.data.Success === "Success"){
             setMessagePacientes('')
+            setHiddenDivPaciente(false)
             setPacientes(res.data.resul);
         }else{
             setPacientes([])
@@ -50,15 +51,13 @@ const getAllPacientes = () =>{
         }
     }).catch(err => console.log("Erro ao buscar colaboradores.", err))
 }
+
 const getDataPaciente = (paciente_id, name_paciente) =>{
     setPacienteId(paciente_id)
     setNamePaciente(name_paciente)
     setHiddenDivPaciente(true)
-    setSearchSearchPaciente(null)
+    setSearchSearchPaciente('')
 }
-console.log(pacienteId)
-console.log(namePaciente)
-console.log(SearchPaciente)
 
 
     return(
@@ -123,7 +122,7 @@ console.log(SearchPaciente)
                 
                 <div className="container__tittle_and_input">
                    <p className='tittle__table__inner'>Nome do paciente</p>
-                   <input type="text" className='input__inner' value={namePaciente ? namePaciente:null} placeholder='Buscar paciente' onChange={(e) => {setSearchSearchPaciente(e.target.value)}}/>
+                   <input type="text" className='input__inner' value={SearchPaciente} placeholder={namePaciente ? namePaciente:'Buscar paciente'} onChange={(e) => {setSearchSearchPaciente(e.target.value)}}/>
                    {SearchPaciente &&(
                         <button className="Btn_buscar" onClick={getAllPacientes}>Buscar</button>
                     )}
