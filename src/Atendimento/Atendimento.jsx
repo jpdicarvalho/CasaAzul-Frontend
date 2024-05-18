@@ -11,8 +11,8 @@ import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { IoGitNetworkOutline } from "react-icons/io5";
-import { FaRegEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdOutlineErrorOutline } from "react-icons/md";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 
 const Atendimento = () =>{
@@ -33,19 +33,9 @@ const navigateToColaboradores = () => {
 const navigateToRelatorios = () => {
     navigate("/Relatorios");
 };
-
 const [atendimentos, setAtendimentos] = useState([]);
-const getAllAtendimento = () =>{
-    axios.get('http://localhost:8000/api/atendimentos/')
-    .then(res =>{
-        if(res.data.Success === "Success"){
-            setAtendimentos(res.data.resu);
-        }
-    }).catch(err => console.log("Erro ao buscar atendimentos.", err))
-}
-useEffect(() =>{
-    getAllAtendimento()
-}, [])
+
+
 //===== Section Finalizar atendimento =====
 const [messageCloseService, setMessageCloseService] = useState('');
 const [hiddenBtn, setHiddenBtn] = useState(false);
@@ -58,12 +48,12 @@ const showBtnCloseService = () =>{
     setHiddenBtn(false);
 }
 
-const finalizarAtendimento = (atendimento_id) => {
-        
+const finalizarAtendimento = (atendimento_id) => {  
         axios.post(`http://localhost:8000/api/closeService/${atendimento_id}`)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessageCloseService('Atendimento encerrado com sucesso.')
+                setHiddenBtn(false);
                 setTimeout(() => {
                     setMessageCloseService(null);
                 }, 2000);
@@ -77,6 +67,18 @@ const finalizarAtendimento = (atendimento_id) => {
                
         })
 }
+//====== Get atendimentos =====
+const getAllAtendimento = () =>{
+    axios.get('http://localhost:8000/api/atendimentos/')
+    .then(res =>{
+        if(res.data.Success === "Success"){
+            setAtendimentos(res.data.resu);
+        }
+    }).catch(err => console.log("Erro ao buscar atendimentos.", err))
+}
+useEffect(() =>{
+    getAllAtendimento()
+}, [hiddenBtn, messageCloseService])
 
     return(
         <div className="main">
@@ -135,6 +137,16 @@ const finalizarAtendimento = (atendimento_id) => {
                         Criar atendimento
                     </button>
                 </div>
+                {messageCloseService === "Atendimento encerrado com sucesso." ? (
+                            <div className="message__success">
+                                <FaRegCheckCircle className="icon__message"/>{messageCloseService}
+                            </div>
+                        ):(
+                            <div className={` ${messageCloseService ? 'message__erro' : ''}`}>
+                                <MdOutlineErrorOutline  className="icon__message"/>{messageCloseService}
+                            </div>
+                            
+                        )}
                 <div className="container__tittle__table">
                    <p className='pacient__inner'>Paciente</p>
                    <p className='pacient__inner'>Atendimento</p>
