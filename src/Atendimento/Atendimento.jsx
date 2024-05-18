@@ -53,6 +53,9 @@ const finalizarAtendimento = (atendimento_id) => {
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessageCloseService('Atendimento encerrado com sucesso.')
+                if(atendimentos.length === 1){
+                    window.location.reload()
+                }
                 setHiddenBtn(false);
                 setTimeout(() => {
                     setMessageCloseService(null);
@@ -154,6 +157,7 @@ useEffect(() =>{
                    <p className='pacient__inner'>Data de criação</p>
                    <p className='pacient__inner'>Status</p>
                 </div>
+                
                 {atendimentos.map((item) =>(
                     <div key={item.service_id} className='conatiner__paciente' >
                         <div className='pacient__box'>
@@ -163,21 +167,22 @@ useEffect(() =>{
                             <p className='pacient__inner'>{item.date_service}</p>
                             <p className='pacient__inner'>{item.status}</p>
                             <p className='icon__patient'>
+
+                            <button className={`add__paciente ${hiddenBtn === true ? 'hiddenBtn':''}`} onClick={hiddenBtnCloseService}>
+                                Encerrar
+                            </button>
+                            
+                            </p>
                             <button className={`Btn__cancelar ${hiddenBtn === false ? 'hiddenBtn':''}`} onClick={showBtnCloseService}>
                                 Cancelar
                             </button>
                             <button className={`Btn__confirmar ${hiddenBtn === false ? 'hiddenBtn':''}`} onClick={() => finalizarAtendimento(item.service_id)}>
                                 Confirmar
                             </button>
-
-                            <button className={`add__paciente ${hiddenBtn === true ? 'hiddenBtn':''}`} onClick={hiddenBtnCloseService}>
-                                Encerrar
-                            </button>
-                            </p>
-                            
                         </div>
                     </div>
                 ))}
+                
             </div>
         </div>
         

@@ -11,8 +11,8 @@ import { FaRegCheckCircle } from "react-icons/fa";
 const AddNewAtendimento = () =>{
 const navigate = useNavigate();
 
-const navigateToAtendimento = (atendimento) => {
-    navigate("/Atendimento", {state: {atendimento}});
+const navigateToAtendimento = () => {
+    navigate("/Atendimento");
 };
 
 //====== Section new Service =====
@@ -155,7 +155,7 @@ const creatNewAtendimento = () =>{
   return(
         <div className="container__form">
             <div className='main__form'>
-                <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToAtendimento("atendimento")}/>
+                <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToAtendimento()}/>
 
                 <div className="tittle__form">
                     Criar Atendimento

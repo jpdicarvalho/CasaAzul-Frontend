@@ -12,8 +12,8 @@ import axios from "axios";
 const AddNewColaborador = () =>{
 const navigate = useNavigate();
 
-const navigateToColaboradores = (colaboradores) => {
-    navigate("/Colaboradores", {state: {colaboradores}});
+const navigateToColaboradores = () => {
+    navigate("/Colaboradores" );
 };
 
 const [newName, setNewName] = useState(null);
@@ -62,6 +62,7 @@ const createNewColaborador = () =>{
                 setMessage("Colaborador cadastrado com sucesso!")
                 setTimeout(() => {
                     setMessage(null);
+                    navigate("/Colaboradores" );
                   }, 2000);
             }else{
                 setMessage("Já existe um colaborador com esse CPF cadastrado.")
@@ -82,7 +83,7 @@ const createNewColaborador = () =>{
     return(
         <div className="container__form">
             <div className='main__form'>
-                <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToColaboradores("colaboradores")}/>
+                <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToColaboradores()}/>
 
                 <div className="tittle__form">
                     Adicionar Colaborador

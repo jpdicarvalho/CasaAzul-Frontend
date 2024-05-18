@@ -49,7 +49,6 @@ const getAllColaboradores = () =>{
 useEffect(() =>{
     getAllColaboradores()
 }, [])
-console.log(colaboradores)
 
     return(
         <div className="main">

@@ -12,8 +12,8 @@ import axios from "axios";
 const AddNewPatient = () =>{
 const navigate = useNavigate();
 
-const navigateToPaciente = (paciente) => {
-    navigate("/Paciente", {state: {paciente}});
+const navigateToPaciente = () => {
+    navigate("/Paciente");
 };
 
 const [newName, setNewName] = useState(null);
@@ -32,7 +32,7 @@ const date = new Date()
 const currentDate = new Date(date);
 const token = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}-${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
-const objectPatient ={
+const valuesPatient =[
     newName,
     newDateBirth,
     newCEP,
@@ -44,25 +44,39 @@ const objectPatient ={
     hasLaudo,
     newCID,
     token
-}
+]
 
-function validationForm (objectPatient) {
-    for(let i=0; i < objectPatient.length; i++){
-        if(!objectPatient[i]){
+function validationForm (valuesPatient) {
+    for(let i=0; i < valuesPatient.length; i++){
+        if(!valuesPatient[i]){
             return false
         }
     }
 }
-const isValidated = validationForm(objectPatient)
-console.log(newDateCreation)
+const isValidated = validationForm(valuesPatient)
+
 const createNewPatient = () =>{
     if(isValidated != false){
+        const objectPatient ={
+            newName,
+            newDateBirth,
+            newCEP,
+            newStreet,
+            newNumber,
+            newBairro,
+            newCity,
+            newDateCreation,
+            hasLaudo,
+            newCID,
+            token
+        }
         axios.post('http://localhost:8000/api/AddNewPatient/', objectPatient)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessage("Paciente cadastrado com sucesso!")
                 setTimeout(() => {
                     setMessage(null);
+                    navigate("/Paciente");
                   }, 2000);
             }
         }).catch(err => console.log(err))
@@ -77,7 +91,7 @@ const createNewPatient = () =>{
     return(
         <div className="container__form">
             <div className='main__form'>
-                <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToPaciente("paciente")}/>
+                <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToPaciente()}/>
 
                 <div className="tittle__form">
                     Adicionar Paciente
@@ -119,6 +133,7 @@ const createNewPatient = () =>{
                     <div className="container__two">
                         <div className="Input__box">
                             <label htmlFor="">Data de inscrição</label>
+                            <p className="subtittle__form">Obs: São será possível editar essa informação no futuro</p>
                             <input type="date" className='input__inner'onChange={(e) => {setNewDateCreation(e.target.value)}}/>
                         </div>
                         <div className="Input__box">

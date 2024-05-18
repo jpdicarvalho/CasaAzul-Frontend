@@ -49,7 +49,7 @@
     border-radius: 5px;
     height: 40px;
     transition: 0.5s;
-    cursor: pointer;
+    cursor: pointer;    
 }
 .Btn_buscar:hover{
     background: blue;
