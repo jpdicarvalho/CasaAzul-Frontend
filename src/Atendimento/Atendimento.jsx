@@ -47,12 +47,36 @@ useEffect(() =>{
     getAllAtendimento()
 }, [])
 //===== Section Finalizar atendimento =====
-const [teste, setteste] = useState([]);
-const finalizarAtendimento = (atendimento_id) => {
-console.log(atendimento_id)
-    
+const [messageCloseService, setMessageCloseService] = useState('');
+const [hiddenBtn, setHiddenBtn] = useState(false);
+
+const hiddenBtnCloseService = () =>{
+    setHiddenBtn(true);
 }
-console.log(atendimentos)
+
+const showBtnCloseService = () =>{
+    setHiddenBtn(false);
+}
+
+const finalizarAtendimento = (atendimento_id) => {
+        
+        axios.post(`http://localhost:8000/api/closeService/${atendimento_id}`)
+        .then(res => {
+            if(res.data.Success === "Success"){
+                setMessageCloseService('Atendimento encerrado com sucesso.')
+                setTimeout(() => {
+                    setMessageCloseService(null);
+                }, 2000);
+            }
+        }).catch(err => {
+            console.log('erro:', err)
+            setMessageCloseService('Erro ao encerrado atendimento. Tente novamente mais tarde')
+                setTimeout(() => {
+                    setMessageCloseService(null);
+                }, 2000);
+               
+        })
+}
 
     return(
         <div className="main">
@@ -127,8 +151,15 @@ console.log(atendimentos)
                             <p className='pacient__inner'>{item.date_service}</p>
                             <p className='pacient__inner'>{item.status}</p>
                             <p className='icon__patient'>
-                            <button className='add__paciente' onClick={() => finalizarAtendimento(item.service_id)}>
-                                Finalizar atendimento
+                            <button className={`Btn__cancelar ${hiddenBtn === false ? 'hiddenBtn':''}`} onClick={showBtnCloseService}>
+                                Cancelar
+                            </button>
+                            <button className={`Btn__confirmar ${hiddenBtn === false ? 'hiddenBtn':''}`} onClick={() => finalizarAtendimento(item.service_id)}>
+                                Confirmar
+                            </button>
+
+                            <button className={`add__paciente ${hiddenBtn === true ? 'hiddenBtn':''}`} onClick={hiddenBtnCloseService}>
+                                Encerrar
                             </button>
                             </p>
                             

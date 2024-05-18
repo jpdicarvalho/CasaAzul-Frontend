@@ -88,3 +88,38 @@
 .service__selected{
     background: #0000005f;
 }
+.hiddenBtn{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.showBtn{
+    opacity: 1;
+}
+.Btn__cancelar{
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    border-radius: 5px;
+    height: 40px;
+    cursor: pointer;
+    outline: none;
+    margin-right: 10px;
+}
+.Btn__cancelar:hover{
+    background: red;
+    color: #fff;
+}
+.Btn__confirmar{
+    background: transparent;
+    border: 1px solid #0f0;
+    color: #0f0;
+    border-radius: 5px;
+    height: 40px;
+    cursor: pointer;
+    outline: none;
+}
+.Btn__confirmar:hover{
+    background: #0f0;
+    color: #fff;
+}
