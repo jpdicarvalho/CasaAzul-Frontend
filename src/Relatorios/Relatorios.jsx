@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
@@ -20,17 +21,20 @@ const Relatorios = () =>{
 const navigate = useNavigate();
 
 
-const navigateToAtendimento = (atendimento) => {
-    navigate("/Atendimento", {state: {atendimento}});
+const navigateToAtendimento = () => {
+    navigate("/Atendimento");
 };
-const navigateToColaboradores = (colaboradores) => {
-    navigate("/Colaboradores", {state: {colaboradores}});
+const navigateToColaboradores = () => {
+    navigate("/Colaboradores");
 };
-const navigateToPaciente = (paciente) => {
-    navigate("/Paciente", {state: {paciente}});
+const navigateToPaciente = () => {
+    navigate("/Paciente");
 };
 const [SearchPaciente, setSearchSearchPaciente] = useState('');
 const [pacientes, setPacientes] = useState([]);
+const [namePaciente, setNamePaciente] = useState('');
+const [pacienteId, setPacienteId] = useState('');
+const [hiddenDivPaciente, setHiddenDivPaciente] = useState(false);
 const [messagePacientes, setMessagePacientes] = useState('');
 
 
@@ -46,8 +50,16 @@ const getAllPacientes = () =>{
         }
     }).catch(err => console.log("Erro ao buscar colaboradores.", err))
 }
+const getDataPaciente = (paciente_id, name_paciente) =>{
+    setPacienteId(paciente_id)
+    setNamePaciente(name_paciente)
+    setHiddenDivPaciente(true)
+    setSearchSearchPaciente(null)
+}
+console.log(pacienteId)
+console.log(namePaciente)
 console.log(SearchPaciente)
-console.log(pacientes)
+
 
     return(
         <div className="main">
@@ -111,11 +123,24 @@ console.log(pacientes)
                 
                 <div className="container__tittle_and_input">
                    <p className='tittle__table__inner'>Nome do paciente</p>
-                   <input type="text" className='input__inner' placeholder='Buscar paciente' onChange={(e) => {setSearchSearchPaciente(e.target.value)}}/>
+                   <input type="text" className='input__inner' value={namePaciente ? namePaciente:null} placeholder='Buscar paciente' onChange={(e) => {setSearchSearchPaciente(e.target.value)}}/>
                    {SearchPaciente &&(
                         <button className="Btn_buscar" onClick={getAllPacientes}>Buscar</button>
                     )}
+                    {messagePacientes === 'Nenhum paciente encontrado.' ?(
+                        <div className='message__search__paciente'>{messagePacientes}</div>
+                    ):(
+                        <div>
+                        {pacientes.map((item) =>(
+                            <div key={item.id} className={`Box__paciente__found ${hiddenDivPaciente ? 'hiddenBtn':''}`} onClick={() => getDataPaciente(item.id, item.name)}>
+                                <p >{item.name}</p>
+                            </div>
+                        ))}
+                        </div>
+                        
+                    )}
                 </div>
+                
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Tipo do atendimento</p>
                    <input type="text" className='input__inner' placeholder='Buscar tipo de atendimento'/>

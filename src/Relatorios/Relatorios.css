@@ -13,3 +13,18 @@
 .container__input__search{
     padding-left: 25px;
 }
+.message__search__paciente{
+    padding-top: 5px;
+    font-size: 14px;
+    color: #535050;
+}
+.Box__paciente__found{
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: -3px 3px 7px 0px #00000030;
+}
+.Box__paciente__found:hover{
+    background: #b1b0b0;
+}
