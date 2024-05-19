@@ -106,13 +106,8 @@ const [MessageReport, setMessageReport] = useState('');
 
 const generateReport = () =>{
     if(pacienteId && serviceId && dateInitial && dateFinal){
-        const valuesToGenerateReport = {
-            pacienteId,
-            serviceId,
-            dateInitial,
-            dateFinal
-        }
-        axios.post('http://localhost:8000/api/generateReport/', valuesToGenerateReport)
+        
+        axios.get(`http://localhost:8000/api/generateReport/${pacienteId}/${serviceId}/${dateInitial}/${dateFinal}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -122,6 +117,7 @@ const generateReport = () =>{
         }).catch(err => console.log("Erro ao gerar relatório.", err))
     }
 }
+console.log(MessageReport)
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -176,7 +172,7 @@ const generateReport = () =>{
                     <div className="tittle__information">
                         Relatórios
                     </div>
-                    <button className='add__paciente' >
+                    <button className='add__paciente' onClick={generateReport}>
                         Gerar relatórios
                     </button>
                 </div>
