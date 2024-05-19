@@ -97,8 +97,35 @@ const getDataTypeService = (paciente_id, name_paciente) =>{
     setHiddenDivService(true)
     setSearchTypeService('')
 }
-
-//===== genereta report =====
+//===== genereta report by patient =====
+const generateReportByPatient = () =>{
+    if(pacienteId){
+        axios.get(`http://localhost:8000/api/generateReportByPatient/${pacienteId}`)
+        .then(res =>{
+            if(res.data.Success === "Success"){
+                setDataReport(res.data.result);
+            }else{
+                setDataReport([])
+                setMessageReport("Nenhum resultado encontrado.")
+            }
+        }).catch(err => console.log("Erro ao gerar relatório.", err))
+    }
+}
+//===== genereta report by service =====
+const generateReportByService = () =>{
+    if(serviceId){
+        axios.get(`http://localhost:8000/api/generateReportByService/${serviceId}`)
+        .then(res =>{
+            if(res.data.Success === "Success"){
+                setDataReport(res.data.result);
+            }else{
+                setDataReport([])
+                setMessageReport("Nenhum resultado encontrado.")
+            }
+        }).catch(err => console.log("Erro ao gerar relatório.", err))
+    }
+}
+//===== genereta report with all values =====
 const [dateInitial, setDateInitial] = useState('');
 const [dateFinal, setDateFinal] = useState('');
 const [dataReport, setDataReport] = useState([]);
@@ -106,7 +133,7 @@ const [MessageReport, setMessageReport] = useState('');
 
 const isValuesInputs = pacienteId && serviceId && dateInitial && dateFinal;
 
-const generateReport = () =>{
+const generateReportWithAllValues = () =>{
     if(isValuesInputs){
         
         axios.get(`http://localhost:8000/api/generateReport/${pacienteId}/${serviceId}/${dateInitial}/${dateFinal}`)
@@ -173,17 +200,26 @@ return(
                 
                 <div className="container__addPaciente">
                     <div className="tittle__information">
-                        Relatórios
+                        Relatório
                     </div>
-                    <button className={`add__paciente ${isValuesInputs ? 'full__btn__report':''}`} onClick={generateReport}>
-                        Gerar relatórios
-                    </button>
+                    {pacienteId && !serviceId && !dateInitial && !dateFinal &&(
+                        <button className={`add__paciente ${pacienteId ? 'full__btn__report':''}`} onClick={generateReportByPatient}>
+                            Gerar relatório paciente
+                        </button>
+                    )}
+                    {isValuesInputs &&(
+                        <button className="full__btn__report" onClick={generateReportWithAllValues}>
+                            Gerar relatório full
+                        </button>
+                    )}
+                    
                 </div>
             <div className="section__inputs__search">
                 
                 <div className="container__tittle_and_input">
                    <p className='tittle__table__inner'>Nome do paciente</p>
-                   <input type="text" className='input__inner' value={SearchPaciente} placeholder={namePaciente ? namePaciente:'Buscar paciente'} onChange={(e) => {setSearchSearchPaciente(e.target.value)}}/>
+                   <p className='tittle__table__inner' style={{fontSize: '12px'}}>Opicional</p>
+                   <input type="text" className='input__inner' value={SearchPaciente} placeholder={namePaciente ? namePaciente:'Buscar...'} onChange={(e) => {setSearchSearchPaciente(e.target.value)}}/>
                    {SearchPaciente &&(
                         <button className="Btn_buscar" onClick={getAllPacientes}>Buscar</button>
                     )}
@@ -203,7 +239,8 @@ return(
                 
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Tipo do atendimento</p>
-                   <input type="text" className='input__inner' value={SearchTypeService} placeholder={nameService ? nameService:'Buscar tipo de atendimento'} onChange={(e) => {setSearchTypeService(e.target.value)}}/>
+                    <p className='tittle__table__inner' style={{fontSize: '12px'}}>Opicional</p>
+                   <input type="text" className='input__inner' value={SearchTypeService} placeholder={nameService ? nameService:'Buscar...'} onChange={(e) => {setSearchTypeService(e.target.value)}}/>
                    {SearchTypeService &&(
                         serviceSearch.map((item) =>(
                             <div key={item.id} className={`Box__paciente__found ${hiddenDivService ? 'hiddenBtn':''}`} onClick={() => getDataTypeService(item.id, item.name)}>
@@ -214,10 +251,12 @@ return(
                 </div>
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Data inicial</p>
+                    <p className='tittle__table__inner' style={{fontSize: '12px'}}>Obrigatório</p>
                    <input type="date" className='input__inner' onChange={(e) =>{setDateInitial(e.target.value)}}/>
                 </div>
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Data final</p>
+                    <p className='tittle__table__inner' style={{fontSize: '12px'}}>Obrigatório</p>
                    <input type="date" className='input__inner' onChange={(e) =>{setDateFinal(e.target.value)}}/>
                 </div>
 
