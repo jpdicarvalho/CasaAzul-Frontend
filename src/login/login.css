@@ -50,14 +50,19 @@
   .btn__login {
     width: 100%;
     padding: 10px;
-    background: white;
+    background: transparent;
     border: 1px solid #437DF7;
     color: #437DF7;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
+    transition: 0.5s;
   }
-
+.full__btn__login{
+  background: #437DF7;
+  color: #fff;
+  transition: 0.5s;
+}
 .input__login{
  outline: none;
 }

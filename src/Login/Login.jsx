@@ -1,5 +1,7 @@
 import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MdOutlineErrorOutline } from "react-icons/md";
+
 import axios from 'axios';
 
 import './Login.css';
@@ -12,9 +14,10 @@ const Login = () => {
     const [password, setPassword] = useState ('');
     const [messageLogin, setMessageLogin] = useState ('');
 
+    const isValidedInput = userName && password;
 
     const login = () =>{
-        if(userName && password){
+        if(isValidedInput){
             axios.get(`http://localhost:8000/api/login/${userName}/${password}`)
             .then(res =>{
                 if(res.data.Success === "Success"){
@@ -23,6 +26,9 @@ const Login = () => {
             }).catch(err => console.log("Erro ao realizar login", err))
         }else{
             setMessageLogin('Preencha todos os campos.')
+            setTimeout(() => {
+                setMessageLogin(null);
+              }, 2000);
         }
     }
 
@@ -34,17 +40,25 @@ const Login = () => {
                         <img src={logoCasaAzul} alt="Casa Azul Logo" />
                     </div>
                     <h2 className='tittle__login'>LOGIN</h2>
+                    {messageLogin === 'Preencha todos os campos.' &&(
+                            <div className={` ${messageLogin ? 'message__erro' : ''}`}>
+                                <MdOutlineErrorOutline  className="icon__message"/>{messageLogin}
+                            </div>
+                        )}
                     <form>
                         <div className="input-group">
                             <label htmlFor="email">E-mail</label>
-                            <input type="email" className="input__login" id="email" name="email" placeholder='usuário' onChange={(e) => setUsername(e.target.value)} required />
+                            <input type="text" className="input__login" id="email" name="email" placeholder='usuário' onChange={(e) => setUsername(e.target.value)}/>
                         </div>
                         <div className="input-group">
                             <label htmlFor="password">Senha</label>
-                            <input type="password" className="input__login" id="password" name="password" placeholder='senha' onChange={(e) => setPassword(e.target.value)} required />
+                            <input type="password" className="input__login" id="password" name="password" placeholder='senha' onChange={(e) => setPassword(e.target.value)}/>
                         </div>
-                        <button type="submit" className='btn__login'>ENTRAR</button>
+                        
                     </form>
+                    
+                    <button type="submit" className={`btn__login ${isValidedInput ? 'full__btn__login':''}`} onClick={login}>ENTRAR</button>
+
                 
                 </div>
             </div>
