@@ -91,7 +91,7 @@ useEffect(() =>{
                 </div>
                 
                 <Link className='name__menu'>
-                    <CiSettings className='icon__menu'/> Configuraçõe
+                    <CiSettings className='icon__menu'/> Configurações
                 </Link>
             </div>
             <div className="container__logout">

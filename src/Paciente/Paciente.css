@@ -12,6 +12,9 @@
     background: #0DB6D321;
 }
 .logo{
+    display: flex;
+    justify-content: start;
+    align-items: center;
     margin-bottom: 50px;
     height: 24px;
     width: 120;
@@ -20,6 +23,7 @@
     font-weight: bold;
     margin-left: 15px;
     border-left: 5px solid #0DB6D3;
+    width: 100%;
 }
 .container__img__logo{
     display: flex;
