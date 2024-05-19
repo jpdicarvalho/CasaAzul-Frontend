@@ -59,6 +59,7 @@ const getDataPaciente = (paciente_id, name_paciente) =>{
     setHiddenDivPaciente(true)
     setSearchSearchPaciente('')
 }
+
 //===== Section get type service =====
 const [SearchTypeService, setSearchTypeService] = useState('');
 const [services, setServices] = useState([]);
@@ -77,6 +78,7 @@ const getAllServices = () =>{
         }
     }).catch(err => console.log("Erro ao buscar serviço.", err))
 }
+
 useEffect(() =>{
     getAllServices()
 }, [SearchTypeService])
@@ -94,6 +96,31 @@ const getDataTypeService = (paciente_id, name_paciente) =>{
     setNameService(name_paciente)
     setHiddenDivService(true)
     setSearchTypeService('')
+}
+
+//===== genereta report =====
+const [dateInitial, setDateInitial] = useState('');
+const [dateFinal, setDateFinal] = useState('');
+const [dataReport, setDataReport] = useState('');
+const [MessageReport, setMessageReport] = useState('');
+
+const generateReport = () =>{
+    if(pacienteId && serviceId && dateInitial && dateFinal){
+        const valuesToGenerateReport = {
+            pacienteId,
+            serviceId,
+            dateInitial,
+            dateFinal
+        }
+        axios.post('http://localhost:8000/api/generateReport/', valuesToGenerateReport)
+        .then(res =>{
+            if(res.data.Success === "Success"){
+                setDataReport(res.data.result);
+            }else{
+                setMessageReport("Nenhum resultado encontrado.")
+            }
+        }).catch(err => console.log("Erro ao gerar relatório.", err))
+    }
 }
     return(
         <div className="main">
@@ -188,11 +215,11 @@ const getDataTypeService = (paciente_id, name_paciente) =>{
                 </div>
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Data inicial</p>
-                   <input type="date" className='input__inner'/>
+                   <input type="date" className='input__inner' onChange={(e) =>{setDateInitial(e.target.value)}}/>
                 </div>
                 <div className="container__tittle_and_input">
                     <p className='tittle__table__inner'>Data final</p>
-                   <input type="date" className='input__inner'/>
+                   <input type="date" className='input__inner' onChange={(e) =>{setDateFinal(e.target.value)}}/>
                 </div>
 
             </div>
