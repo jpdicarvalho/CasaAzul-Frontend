@@ -207,6 +207,11 @@ return(
                             Gerar relatório paciente
                         </button>
                     )}
+                    {serviceId && !pacienteId && !dateInitial && !dateFinal &&(
+                        <button className={`add__paciente ${serviceId ? 'full__btn__report':''}`} onClick={generateReportByService}>
+                            Gerar relatório serviço
+                        </button>
+                    )}
                     {isValuesInputs &&(
                         <button className="full__btn__report" onClick={generateReportWithAllValues}>
                             Gerar relatório full
