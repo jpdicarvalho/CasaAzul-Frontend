@@ -125,6 +125,20 @@ const generateReportByService = () =>{
         }).catch(err => console.log("Erro ao gerar relatório.", err))
     }
 }
+//===== genereta report by period =====
+const generateReportByPeriod = () =>{
+    if(dateInitial && dateFinal){
+        axios.get(`http://localhost:8000/api/generateReportByPeriod/${dateInitial}/${dateFinal}`)
+        .then(res =>{
+            if(res.data.Success === "Success"){
+                setDataReport(res.data.result);
+            }else{
+                setDataReport([])
+                setMessageReport("Nenhum resultado encontrado.")
+            }
+        }).catch(err => console.log("Erro ao gerar relatório.", err))
+    }
+}
 //===== genereta report with all values =====
 const [dateInitial, setDateInitial] = useState('');
 const [dateFinal, setDateFinal] = useState('');
@@ -202,19 +216,24 @@ return(
                     <div className="tittle__information">
                         Relatório
                     </div>
-                    {pacienteId && !serviceId && !dateInitial && !dateFinal &&(
-                        <button className={`add__paciente ${pacienteId ? 'full__btn__report':''}`} onClick={generateReportByPatient}>
-                            Gerar relatório paciente
+                    {dateInitial && dateFinal && pacienteId && !serviceId &&(
+                        <button className="full__btn__report" onClick={generateReportByPatient}>
+                            Gerar relatório
                         </button>
                     )}
-                    {serviceId && !pacienteId && !dateInitial && !dateFinal &&(
-                        <button className={`add__paciente ${serviceId ? 'full__btn__report':''}`} onClick={generateReportByService}>
-                            Gerar relatório serviço
+                    {dateInitial && dateFinal && !pacienteId && serviceId &&(
+                        <button className="full__btn__report" onClick={generateReportByService}>
+                            Gerar relatório
+                        </button>
+                    )}
+                    {dateInitial && dateFinal && !serviceId && !pacienteId &&(
+                        <button className="full__btn__report" onClick={generateReportByPeriod}>
+                            Gerar relatório
                         </button>
                     )}
                     {isValuesInputs &&(
                         <button className="full__btn__report" onClick={generateReportWithAllValues}>
-                            Gerar relatório full
+                            Gerar relatório
                         </button>
                     )}
                     
@@ -266,13 +285,20 @@ return(
                 </div>
 
             </div>
+            <div className='container__qntReport'>
+                    {dataReport.length > 0 &&(
+                        <p>Resultados ({dataReport.length})</p>
+                    )}
+            </div>
             <div className="container__tittle__table">
                    <p className='pacient__inner'>Paciente</p>
                    <p className='pacient__inner'>Profissional</p>
                    <p className='pacient__inner' style={{width: 'auto', marginRight: '10px'}}>Tipo do atendimento</p>
                    <p className='pacient__inner'style={{width: 'auto'}}>Data do atendimento</p>
                 </div>
+                
             <div className="container__result__report">
+                
                 {dataReport.length > 0 ?(
                     dataReport.map((item) =>(
                         <div key={item.service_id} className='conatiner__paciente' >

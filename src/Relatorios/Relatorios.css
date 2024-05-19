@@ -18,6 +18,12 @@
     font-size: 14px;
     color: #535050;
 }
+.container__result__report{
+    height: 455px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 25px;
+}
 .Box__paciente__found{
     padding: 5px;
     margin-top: 5px;
@@ -44,4 +50,11 @@
     border-radius: 10px;
     transition: 0.5s;
     cursor: pointer;
+    width: 200px;
+}
+.container__qntReport{
+    padding-top: 10px;
+    padding-left: 15px;
+    font-size: 18px;
+    color: #535050;
 }
