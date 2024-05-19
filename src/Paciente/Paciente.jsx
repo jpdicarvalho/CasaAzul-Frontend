@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Paciente.css'
 import logoCasaAzul from '../logo-casaAzul.png'
@@ -10,7 +10,6 @@ import { PiUsers } from "react-icons/pi";
 import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
-import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { IoGitNetworkOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";

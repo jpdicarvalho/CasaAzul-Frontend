@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './Login/Login';
 import Paciente from './Paciente/Paciente';
 import AddNewPatient from './AddNewPatient/AddNewPatient';
 import Atendimento from './Atendimento/Atendimento';
@@ -12,7 +13,7 @@ function App() {
   return (
     <Router>
       <Routes>
-
+        <Route path='/' element={<Login/>}/>
         <Route path='/Atendimento' element={<Atendimento/>}/>
         <Route path='/Paciente' element={<Paciente/>}/>
         <Route path='/Colaboradores' element={<Colaboradores/>}/>
@@ -20,7 +21,6 @@ function App() {
         <Route path='/AddNewPatient' element={<AddNewPatient/>}/>
         <Route path='/AddNewColaborador' element={<AddNewColaborador/>}/>
         <Route path='/AddNewAtendimento' element={<AddNewAtendimento/>}/>
-
       </Routes>
     </Router>
   )

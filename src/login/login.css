@@ -1,4 +1,4 @@
-body {
+.body__login {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
@@ -17,14 +17,15 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .logo img {
+  .logo__login img {
     width: 80px;
     margin-bottom: 20px;
   }
   
-  h2 {
+  .tittle__login {
     margin: 10px 0;
     font-size: 16px;
+    color: black;
   }
   
   .input-group {
@@ -46,31 +47,17 @@ body {
     border-radius: 5px;
   }
   
-  button {
+  .btn__login {
     width: 100%;
     padding: 10px;
-    background-color: #437DF7;
-    color: white;
-    border: none;
+    background: white;
+    border: 1px solid #437DF7;
+    color: #437DF7;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
   }
-  
-  button:hover {
-    background-color: #365fc7;
-  }
-  
-  a {
-    display: block;
-    margin-top: 20px;
-    color: #437DF7;
-    text-decoration: none;
-    font-size: 12px;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
 
-  
+.input__login{
+ outline: none;
+}
