@@ -146,6 +146,7 @@ const creatNewAtendimento = () =>{
                 setMessageNewAtendimento('Novo atendimento cadastrado.')
                 setTimeout(() => {
                     setMessageNewAtendimento(null);
+                    navigate("/Atendimento");
                 }, 2000);
             }
         }).catch(err => console.log('erro ao cadastrar atendimento', err))
@@ -220,7 +221,7 @@ const creatNewAtendimento = () =>{
 
                                 {colaboradores.map((item) =>(
                                     <div key={item.id} className={`box_colaborador ${arrayColaborador.includes(item.id) ? 'colaborador__selected':''}`} onClick={() => toggleItemColaborador(item.id)}>
-                                        <div className="pacient__box" style={{color: '#2d2d2fb1'}}>
+                                        <div className="colaborador__box"   >
                                             <p className='pacient__inner'>{item.name}</p>
                                             <p className='pacient__inner'>{item.profession}</p>
                                         </div>
@@ -243,7 +244,7 @@ const creatNewAtendimento = () =>{
 
                                 {pacientes.map((item) =>(
                                     <div key={item.id} className={`box_colaborador ${arrayPacientes.includes(item.id) ? 'colaborador__selected':''}`} onClick={() => toggleItemPaciente(item.id)}>
-                                        <div className="pacient__box" style={{color: '#2d2d2fb1'}}>
+                                        <div className="colaborador__box">
                                             <p className='pacient__inner'>{item.name}</p>
                                             <p className='pacient__inner'>{item.date_birth}</p>
                                         </div>

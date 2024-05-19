@@ -2,10 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 1000;
-    height: 100%;
+    height: 737px;
     padding: 50px;
-    background: linear-gradient(#437DF7, #0DB6D3);
+  background: linear-gradient(#437DF7, #0DB6D3);
 }
 .main__form{
     background: white;

@@ -37,3 +37,11 @@
     color: #535050;
     font-size: 20px;
 }
+.full__btn__report{
+    background: blue;
+    border: 1px solid blue;
+    color: #fff;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}

@@ -141,17 +141,17 @@ return(
                 </div>
             </div>
             <div className="container__menus">
-                <div onClick={() => navigateToAtendimento("atendimento")}>
+                <div onClick={() => navigateToAtendimento()}>
                     <Link className='name__menu' >
                         <IoGitNetworkOutline className='icon__menu'/> Atendimento
                     </Link>
                 </div>
-                <div onClick={() => navigateToColaboradores("colaboradores")}>
+                <div onClick={() => navigateToColaboradores()}>
                     <Link className='name__menu'>
                         <PiUsers className='icon__menu'/> Colaboradores
                     </Link>
                 </div>
-                <div onClick={() => navigateToPaciente("paciente")}>
+                <div onClick={() => navigateToPaciente()}>
                     <Link className="name__menu">
                         <LiaUserSolid className='icon__menu'/> Pacientes
                     </Link>
@@ -170,14 +170,12 @@ return(
                 
             </div>
             <div className="section__information">
-                <div className="container__search">
-                    <input type="search" className='inputSearch' placeholder='Pesquisar'/>
-                </div>
+                
                 <div className="container__addPaciente">
                     <div className="tittle__information">
                         Relatórios
                     </div>
-                    <button className='add__paciente ' onClick={generateReport}>
+                    <button className={`add__paciente ${isValuesInputs ? 'full__btn__report':''}`} onClick={generateReport}>
                         Gerar relatórios
                     </button>
                 </div>

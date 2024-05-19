@@ -73,11 +73,11 @@ useEffect(() =>{
                         <IoGitNetworkOutline className='icon__menu'/> Atendimento
                     </Link>
                 </div>
-                <div>
+                
                     <Link className="selected">
                         <PiUsers className='icon__menu'/> Colaboradores
                     </Link>
-                </div>
+                
                 <div onClick={() => navigateToPaciente()}>
                     <Link className='name__menu'>
                         <LiaUserSolid className='icon__menu'/> Pacientes
