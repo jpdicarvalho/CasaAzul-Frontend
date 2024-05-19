@@ -28,3 +28,12 @@
 .Box__paciente__found:hover{
     background: #b1b0b0;
 }
+.message__report{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    text-align: center;
+    color: #535050;
+    font-size: 20px;
+}

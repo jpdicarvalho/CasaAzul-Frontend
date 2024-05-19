@@ -101,24 +101,29 @@ const getDataTypeService = (paciente_id, name_paciente) =>{
 //===== genereta report =====
 const [dateInitial, setDateInitial] = useState('');
 const [dateFinal, setDateFinal] = useState('');
-const [dataReport, setDataReport] = useState('');
+const [dataReport, setDataReport] = useState([]);
 const [MessageReport, setMessageReport] = useState('');
 
+const isValuesInputs = pacienteId && serviceId && dateInitial && dateFinal;
+
 const generateReport = () =>{
-    if(pacienteId && serviceId && dateInitial && dateFinal){
+    if(isValuesInputs){
         
         axios.get(`http://localhost:8000/api/generateReport/${pacienteId}/${serviceId}/${dateInitial}/${dateFinal}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
             }else{
+                setDataReport([])
                 setMessageReport("Nenhum resultado encontrado.")
             }
         }).catch(err => console.log("Erro ao gerar relatório.", err))
+    }else{
+        setDataReport([])
+        setMessageReport("Preencha todos os campos para gerar o relatório.")
     }
 }
-console.log(MessageReport)
-    return(
+return(
         <div className="main">
             <div className="menu__lateral">
             <div className="logo">
@@ -172,7 +177,7 @@ console.log(MessageReport)
                     <div className="tittle__information">
                         Relatórios
                     </div>
-                    <button className='add__paciente' onClick={generateReport}>
+                    <button className='add__paciente ' onClick={generateReport}>
                         Gerar relatórios
                     </button>
                 </div>
@@ -218,6 +223,40 @@ console.log(MessageReport)
                    <input type="date" className='input__inner' onChange={(e) =>{setDateFinal(e.target.value)}}/>
                 </div>
 
+            </div>
+            <div className="container__tittle__table">
+                   <p className='pacient__inner'>Paciente</p>
+                   <p className='pacient__inner'>Profissional</p>
+                   <p className='pacient__inner' style={{width: 'auto', marginRight: '10px'}}>Tipo do atendimento</p>
+                   <p className='pacient__inner'style={{width: 'auto'}}>Data do atendimento</p>
+                </div>
+            <div className="container__result__report">
+                {dataReport.length > 0 ?(
+                    dataReport.map((item) =>(
+                        <div key={item.service_id} className='conatiner__paciente' >
+                            <div className='pacient__box'>
+                                <p className='pacient__inner'>{item.patient_name}</p>
+                                <p className='pacient__inner'>{item.professional_name}</p>
+                                <p className='pacient__inner'style={{marginRight: '20px'}}>{item.name_service}</p>
+                                <p className='pacient__inner'>{item.data_servico}</p>
+                            </div>
+                        </div>
+                    ))
+                    ):(
+                        <div className='message__report'>
+                            {MessageReport === 'Nenhum resultado encontrado.' ?(
+                                <div>
+                                    {MessageReport}
+                                </div>
+                            ):(
+                                <div>
+                                    {MessageReport}
+                                </div>
+                            )}
+                        </div>
+                    )
+                
+                }
             </div>
             </div>
         </div>
