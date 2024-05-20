@@ -18,7 +18,7 @@ const Login = () => {
 
     const login = () =>{
         if(isValidedInput){
-            axios.get(`http://localhost:8000/api/login/${userName}/${password}`)
+            axios.get(`https://api-casa-azul.up.railway.app/api/login/${userName}/${password}`)
             .then(res =>{
                 if(res.data.Success === "Success"){
                     navigate("/Atendimento");
