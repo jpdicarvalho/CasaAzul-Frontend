@@ -70,7 +70,7 @@ const createNewPatient = () =>{
             newCID,
             token
         }
-        axios.post('http://localhost:8000/api/AddNewPatient/', objectPatient)
+        axios.post('https://api-casa-azul.up.railway.app/api/AddNewPatient/', objectPatient)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessage("Paciente cadastrado com sucesso!")
