@@ -39,7 +39,7 @@ const navigateToRelatorios = () => {
 const [colaboradores, setColaboradores] = useState([]);
 
 const getAllColaboradores = () =>{
-    axios.get('http://localhost:8000/api/colaboradores/')
+    axios.get('https://api-casa-azul.up.railway.app/api/colaboradores/')
     .then(res =>{
         if(res.data.Success === "Success"){
             setColaboradores(res.data.resul);
