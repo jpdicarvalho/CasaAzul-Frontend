@@ -56,7 +56,7 @@ const createNewColaborador = () =>{
             newObservation
         }
 
-        axios.post('http://localhost:8000/api/AddNewColaborador/', objectColaborador)
+        axios.post('https://api-casa-azul.up.railway.app/api/AddNewColaborador/', objectColaborador)
         .then(res => {
             if(res.data.Message === "Success"){
                 setMessage("Colaborador cadastrado com sucesso!")
