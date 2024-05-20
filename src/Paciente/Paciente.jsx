@@ -40,7 +40,7 @@ const navigateToRelatorios = () => {
 };
 
 const getAllPatients = () =>{
-    axios.get('http://localhost:8000/api/patients/')
+    axios.get('https://api-casa-azul.up.railway.app/api/patients/')
     .then(res =>{
         if(res.data.Success === "Success"){
             setPacientes(res.data.result);
