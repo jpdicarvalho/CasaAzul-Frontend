@@ -41,7 +41,7 @@ const [arrayService, setArrayService] = useState([]);
 const [messageService, setMessageService] = useState('');
 
 const getAllServices = () =>{
-    axios.get('http://localhost:8000/api/get-services/')
+    axios.get('https://api-casa-azul.up.railway.app/api/get-services/')
     .then(res =>{
         if(res.data.Success === "Success"){
             setServices(res.data.resu);
@@ -74,7 +74,7 @@ const [messagePaciente, setMessagePaciente] = useState('');
 
 
 const getAllPaciente = () =>{
-    axios.get(`http://localhost:8000/api/get-paciente/${SearchPaciente}`)
+    axios.get(`https://api-casa-azul.up.railway.app/api/get-paciente/${SearchPaciente}`)
     .then(res =>{
         if(res.data.Success === "Success"){
             setMessagePaciente('')
@@ -105,7 +105,7 @@ const [colaboradoreId, setColaboradoreId] = useState('');
 const [messageColaborador, setMessageColaborador] = useState('');
 
 const getAllColaboradores = () =>{
-    axios.get(`http://localhost:8000/api/get-colaboradores/${SearchColaborador}`)
+    axios.get(`https://api-casa-azul.up.railway.app/api/get-colaboradores/${SearchColaborador}`)
     .then(res =>{
         if(res.data.Success === "Success"){
             setMessageColaborador('')
@@ -140,7 +140,7 @@ const creatNewAtendimento = () =>{
             colaboradoreId,
             pacienteId
         }
-        axios.post('http://localhost:8000/api/addNewAtendimento/', valuesNewAtendimento)
+        axios.post('https://api-casa-azul.up.railway.app/api/addNewAtendimento/', valuesNewAtendimento)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessageNewAtendimento('Novo atendimento cadastrado.')
