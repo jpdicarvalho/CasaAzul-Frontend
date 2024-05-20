@@ -40,7 +40,7 @@ const [hiddenDivPaciente, setHiddenDivPaciente] = useState(false);
 const [messagePacientes, setMessagePacientes] = useState('');
 
 const getAllPacientes = () =>{
-    axios.get(`http://localhost:8000/api/get-pacientes/${SearchPaciente}`)
+    axios.get(`https://api-casa-azul.up.railway.app/api/get-pacientes/${SearchPaciente}`)
     .then(res =>{
         if(res.data.Success === "Success"){
             setMessagePacientes('')
@@ -68,7 +68,7 @@ const [serviceId, setServiceId] = useState('');
 const [hiddenDivService, setHiddenDivService] = useState(false);
 
 const getAllServices = () =>{
-    axios.get('http://localhost:8000/api/get-services/')
+    axios.get('https://api-casa-azul.up.railway.app/api/get-services/')
     .then(res =>{
         if(res.data.Success === "Success"){
             setHiddenDivService(false)
@@ -100,7 +100,7 @@ const getDataTypeService = (paciente_id, name_paciente) =>{
 //===== genereta report by patient =====
 const generateReportByPatient = () =>{
     if(pacienteId){
-        axios.get(`http://localhost:8000/api/generateReportByPatient/${pacienteId}`)
+        axios.get(`https://api-casa-azul.up.railway.app/api/generateReportByPatient/${pacienteId}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -114,7 +114,7 @@ const generateReportByPatient = () =>{
 //===== genereta report by service =====
 const generateReportByService = () =>{
     if(serviceId){
-        axios.get(`http://localhost:8000/api/generateReportByService/${serviceId}`)
+        axios.get(`https://api-casa-azul.up.railway.app/api/generateReportByService/${serviceId}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -128,7 +128,7 @@ const generateReportByService = () =>{
 //===== genereta report by period =====
 const generateReportByPeriod = () =>{
     if(dateInitial && dateFinal){
-        axios.get(`http://localhost:8000/api/generateReportByPeriod/${dateInitial}/${dateFinal}`)
+        axios.get(`https://api-casa-azul.up.railway.app/api/generateReportByPeriod/${dateInitial}/${dateFinal}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -150,7 +150,7 @@ const isValuesInputs = pacienteId && serviceId && dateInitial && dateFinal;
 const generateReportWithAllValues = () =>{
     if(isValuesInputs){
         
-        axios.get(`http://localhost:8000/api/generateReport/${pacienteId}/${serviceId}/${dateInitial}/${dateFinal}`)
+        axios.get(`https://api-casa-azul.up.railway.app/api/generateReport/${pacienteId}/${serviceId}/${dateInitial}/${dateFinal}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
