@@ -49,7 +49,7 @@ const showBtnCloseService = () =>{
 }
 
 const finalizarAtendimento = (atendimento_id) => {  
-        axios.post(`http://localhost:8000/api/closeService/${atendimento_id}`)
+        axios.post(`https://api-casa-azul.up.railway.app/api/closeService/${atendimento_id}`)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessageCloseService('Atendimento encerrado com sucesso.')
@@ -72,7 +72,7 @@ const finalizarAtendimento = (atendimento_id) => {
 }
 //====== Get atendimentos =====
 const getAllAtendimento = () =>{
-    axios.get('http://localhost:8000/api/atendimentos/')
+    axios.get('https://api-casa-azul.up.railway.app/api/atendimentos/')
     .then(res =>{
         if(res.data.Success === "Success"){
             setAtendimentos(res.data.resu);
