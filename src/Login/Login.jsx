@@ -21,7 +21,7 @@ const Login = () => {
             axios.get(`https://api-casa-azul.up.railway.app/api/login/${userName}/${password}`)
             .then(res =>{
                 if(res.data.Success === "Success"){
-                    navigate("/CasaAzul-Frontend/Atendimento");
+                    navigate("/Atendimento");
                 }
             }).catch(err => console.log("Erro ao realizar login", err))
         }else{
