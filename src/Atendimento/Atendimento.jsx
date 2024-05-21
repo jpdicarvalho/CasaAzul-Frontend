@@ -54,7 +54,7 @@ const finalizarAtendimento = (atendimento_id) => {
             if(res.data.Success === "Success"){
                 setMessageCloseService('Atendimento encerrado com sucesso.')
                 if(atendimentos.length === 1){
-                    window.location.reload()
+                    navigate("/Atendimento");
                 }
                 setHiddenBtn(false);
                 setTimeout(() => {
