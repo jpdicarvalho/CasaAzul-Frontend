@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom"
-import './AddNewPatient.css'
+import { useNavigate, useLocation } from "react-router-dom"
+import './EditPatient.css'
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { FaRegCheckCircle } from "react-icons/fa";
@@ -9,13 +9,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-const AddNewPatient = () =>{
+const EditPatient = () =>{
 const navigate = useNavigate();
+const location = useLocation();
+
+const { pacientes } = location.state;
+const paciente = pacientes;
 
 const navigateToPaciente = () => {
     navigate("/Paciente");
 };
 
+console.log(paciente)
 const [newName, setNewName] = useState(null);
 const [newDateBirth, setNewDateBirth] = useState('');
 const [newCEP, setNewCEP] = useState('');
@@ -28,36 +33,22 @@ const [hasLaudo, setHasLaudo] = useState('');
 const [newCID, setNewCID] = useState('');
 const [message, setMessage] = useState('');
 
-const date = new Date()
-const currentDate = new Date(date);
-const token = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}-${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
-const valuesPatient =[
-    newName,
-    newDateBirth,
-    newCEP,
-    newStreet,
-    newNumber,
-    newBairro,
-    newCity,
-    newDateCreation,
-    hasLaudo,
-    newCID,
-    token
-]
+const isValidated =
+    newName||
+    newDateBirth||
+    newCEP||
+    newStreet||
+    newNumber||
+    newBairro||
+    newCity||
+    newDateCreation||
+    hasLaudo||
+    newCID;
 
-function validationForm (valuesPatient) {
-    for(let i=0; i < valuesPatient.length; i++){
-        if(!valuesPatient[i]){
-            return false
-        }
-    }
-}
-const isValidated = validationForm(valuesPatient)
-
-const createNewPatient = () =>{
-    if(isValidated != false){
-        const objectPatient ={
+const updatePatient = () =>{
+    if(isValidated){
+        const objectUpdatePatient ={
             newName,
             newDateBirth,
             newCEP,
@@ -68,12 +59,13 @@ const createNewPatient = () =>{
             newDateCreation,
             hasLaudo,
             newCID,
-            token
+            pacienteId: paciente.id,
+            AddressId: paciente.address_id
         }
-        axios.post('https://api-casa-azul.up.railway.app/api/AddNewPatient/', objectPatient)
+        axios.post('https://api-casa-azul.up.railway.app/api/updatePatient/', objectUpdatePatient)
         .then(res => {
             if(res.data.Success === "Success"){
-                setMessage("Paciente cadastrado com sucesso!")
+                setMessage("Paciente atualizado com sucesso!")
                 setTimeout(() => {
                     setMessage(null);
                     navigate("/Paciente");
@@ -81,7 +73,7 @@ const createNewPatient = () =>{
             }
         }).catch(err => console.log(err))
     }else{
-        setMessage("É necessário preencher todos os campos.")
+        setMessage("É necessário ao menos um campos.")
         setTimeout(() => {
             setMessage(null);
           }, 2000);
@@ -94,40 +86,40 @@ const createNewPatient = () =>{
                 <IoCaretBackCircleOutline className="icon__back" onClick={() => navigateToPaciente()}/>
 
                 <div className="tittle__form">
-                    Adicionar Paciente
+                    Editar Paciente
                 </div>
                 <div className="subtittle__form">
-                    Preencha as informações necessárias para cadastrar o paciente
+                    Edite as informações necessárias do paciente
                 </div>
                 <div className="container__inputs">
                     <div className="container__one">
                         <div className="Input__box">
                             <label htmlFor="">Nome</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewName(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewName(e.target.value)}} placeholder={paciente.name}/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Data de nascimento</label>
-                            <input type="date" className='input__inner' onChange={(e) => {setNewDateBirth(e.target.value)}}/>
+                            <input type="date" className='input__inner' onChange={(e) => {setNewDateBirth(e.target.value)}} />
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">CEP</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewCEP(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewCEP(e.target.value)}} placeholder={paciente.CEP}/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Rua</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewStreet(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewStreet(e.target.value)}} placeholder={paciente.street}/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Bairro</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewBairro(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewBairro(e.target.value)}} placeholder={paciente.neighborhood}/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Número da casa</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewNumber(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewNumber(e.target.value)}} placeholder={paciente.number}/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Cidade</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewCity(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewCity(e.target.value)}} placeholder={paciente.city}/>
                         </div>
                     </div>
                     <div className="container__two">
@@ -160,7 +152,7 @@ const createNewPatient = () =>{
                         {hasLaudo === 'Sim' &&(
                             <div className="Input__box">
                                 <label htmlFor="">CID</label>
-                                <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}}/>
+                                <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder={paciente.code_cid}/>
                             </div>
                         )}
                         
@@ -175,7 +167,7 @@ const createNewPatient = () =>{
                             
                         )}
                         
-                        <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={createNewPatient}>
+                        <button className={`Btn_cadastrar ${isValidated ? 'Skilled__button' : ''}`} onClick={updatePatient}>
                             Cadastrar
                         </button>
                     </div>
@@ -184,4 +176,4 @@ const createNewPatient = () =>{
         </div>
     )
 };
-export default AddNewPatient;
+export default EditPatient;

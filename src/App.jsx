@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login/Login';
 import Paciente from './Paciente/Paciente';
+import EditPatient from './EditPatient/EditPatient';
 import AddNewPatient from './AddNewPatient/AddNewPatient';
 import Atendimento from './Atendimento/Atendimento';
 import AddNewAtendimento from './AddNewAtendimento/AddNewAtendimento';
@@ -16,6 +17,7 @@ function App() {
         <Route path='/CasaAzul-Frontend' element={<Login/>}/>
         <Route path='/Atendimento' element={<Atendimento/>}/>
         <Route path='/Paciente' element={<Paciente/>}/>
+        <Route path='/EditPatient' element={<EditPatient/>}/>
         <Route path='/Colaboradores' element={<Colaboradores/>}/>
         <Route path='/Relatorios' element={<Relatorios/>}/>
         <Route path='/AddNewPatient' element={<AddNewPatient/>}/>

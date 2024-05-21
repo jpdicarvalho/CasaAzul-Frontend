@@ -169,6 +169,13 @@
     background:#fff;
     box-shadow: -3px 3px 7px 0px #00000030;
     max-width: 940px;
+    transition: 0.5s;
+
+}
+.conatiner__paciente__selected{
+    background: red;
+    height: 300px;
+    transition: 0.5s;
 }
 .pacient__box{
     display: flex;

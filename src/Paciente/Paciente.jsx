@@ -12,11 +12,9 @@ import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { IoGitNetworkOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
-
+import { MdOutlineErrorOutline } from "react-icons/md";
+import { FaRegCheckCircle } from "react-icons/fa";
 import axios from 'axios';
-
-
 
 const Paciente = () =>{
 
@@ -50,6 +48,11 @@ const getAllPatients = () =>{
 useEffect(() =>{
     getAllPatients()
 }, [])
+
+//====== Set edit paciente =====
+const navigateToEditPaciente = (pacientes) => {
+    navigate("/EditPatient", { state: { pacientes } });
+};
 
     return(
         <div className="main">
@@ -125,10 +128,11 @@ useEffect(() =>{
                             <p className='pacient__inner'>{item.laudo}</p>
                             <p className='pacient__inner'>{item.code_cid}</p>
                             <p className='icon__patient'>
-                                <FaRegEdit />
-                                <MdDeleteOutline />
+                                <FaRegEdit onClick={() => navigateToEditPaciente(item)}/>
                             </p>
-                            
+                        </div>
+                        <div className="conatiner__edit__iputs">
+                       
                         </div>
                     </div>
                 ))}
