@@ -34,33 +34,16 @@ const [newCID, setNewCID] = useState('');
 const [message, setMessage] = useState('');
 
 
-const isValidated =
-    newName||
-    newDateBirth||
-    newCEP||
-    newStreet||
-    newNumber||
-    newBairro||
-    newCity||
-    newDateCreation||
-    hasLaudo||
-    newCID;
+const isValidatedInputsPatient = newName|| newDateBirth|| newDateCreation|| hasLaudo;
 
 const updatePatient = () =>{
-    if(isValidated){
+    if(isValidatedInputsPatient){
         const objectUpdatePatient ={
             newName,
             newDateBirth,
-            newCEP,
-            newStreet,
-            newNumber,
-            newBairro,
-            newCity,
             newDateCreation,
             hasLaudo,
-            newCID,
             pacienteId: paciente.id,
-            AddressId: paciente.address_id
         }
         axios.post('https://api-casa-azul.up.railway.app/api/updatePatient/', objectUpdatePatient)
         .then(res => {
@@ -166,7 +149,11 @@ const updatePatient = () =>{
                             </div>
                             
                         )}
-                        
+                        {isValidatedInputsPatient &&(
+                            <button className={`Btn_cadastrar ${isValidatedInputsPatient ? 'Skilled__button' : ''}`} onClick={updatePatient}>
+                                Salvar
+                            </button>
+                        )}
                         <button className={`Btn_cadastrar ${isValidated ? 'Skilled__button' : ''}`} onClick={updatePatient}>
                             Cadastrar
                         </button>
