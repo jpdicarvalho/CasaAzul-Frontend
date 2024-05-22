@@ -36,8 +36,8 @@ const [message, setMessage] = useState('');
 
 const isValidatedInputsPatient = newName|| newDateBirth|| newDateCreation|| hasLaudo;
 const isValidatedInputsAddress = newCEP|| newStreet|| newNumber|| newBairro || newCity;
-const isValidatedPatientANDAddress = isValidatedInputsPatient && isValidatedInputsAddress;
-console.log(isValidatedPatientANDAddress)
+const isValidatedPatientANDaddress = isValidatedInputsPatient && isValidatedInputsAddress;
+console.log(isValidatedPatientANDaddress)
 //Function to update patient
 const updatePatient = () =>{
     if(isValidatedInputsPatient){
@@ -95,6 +95,12 @@ const updateAddress = () =>{
           }, 2000);
     }
     
+}
+
+//Fnction to call function updatePatient and updateAddress
+const updatePatientANDaddress = () =>{
+    updatePatient()
+    updateAddress()
 }
     return(
         <div className="container__form">
@@ -189,6 +195,11 @@ const updateAddress = () =>{
                         )}
                         {isValidatedInputsAddress &&(
                             <button className={`Btn_cadastrar ${isValidatedInputsAddress ? 'Skilled__button' : ''}`} onClick={updateAddress}>
+                                Salvar
+                            </button>
+                        )}
+                        {isValidatedPatientANDaddress &&(
+                            <button className={`Btn_cadastrar ${isValidatedPatientANDaddress ? 'Skilled__button' : ''}`} onClick={updatePatientANDaddress}>
                                 Salvar
                             </button>
                         )}
