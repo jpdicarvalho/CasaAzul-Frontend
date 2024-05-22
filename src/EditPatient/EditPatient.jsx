@@ -148,7 +148,7 @@ const updateAddress = () =>{
                                 <input 
                                     type="checkbox"  
                                     className='input__inner'
-                                    checked={paciente.laudo === 'Sim'}
+                                    checked={paciente.laudo === 'Sim' ? paciente.laudo:''}
                                     onChange={(e) => {setHasLaudo('Sim')}} // Define o estado como true se marcado, false se não marcado
                                 />
                                 Sim
@@ -158,7 +158,7 @@ const updateAddress = () =>{
                                 <input 
                                     type="checkbox"  
                                     className='input__inner'
-                                    checked={paciente.laudo === 'Não'}
+                                    checked={hasLaudo === 'Não'}
                                     onChange={(e) => {setHasLaudo('Não'), setNewCID('não')}} // Define o estado como false se marcado, true se não marcado
                                 />
                                 Não
