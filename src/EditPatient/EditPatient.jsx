@@ -102,19 +102,6 @@ const updatePatientANDaddress = () =>{
     updateAddress()
 }
 
-const renderBtn = () =>{
-    if(isValidatedInputsPatient){
-        return (
-            <div>
-                {isValidatedInputsPatient &&(
-                            <button className={`Btn_cadastrar ${isValidatedInputsPatient ? 'Skilled__button' : ''}`} onClick={updatePatient}>
-                                Salvar
-                            </button>
-                        )}
-            </div>
-        )
-    }else if()
-}
     return(
         <div className="container__form">
             <div className='main__form'>
@@ -202,7 +189,11 @@ const renderBtn = () =>{
                             
                         )}
 
-                        
+                        {isValidatedInputsPatient &&(
+                            <button className={`Btn_cadastrar ${isValidatedInputsPatient ? 'Skilled__button' : ''}`} onClick={updatePatient}>
+                                Salvar
+                            </button>
+                        )}
                         {isValidatedInputsAddress &&(
                             <button className={`Btn_cadastrar ${isValidatedInputsAddress ? 'Skilled__button' : ''}`} onClick={updateAddress}>
                                 Salvar
