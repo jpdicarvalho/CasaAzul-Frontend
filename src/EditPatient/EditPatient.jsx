@@ -164,7 +164,7 @@ const updateAddress = () =>{
                                 Não
                             </label>
                         </div>
-                        {hasLaudo === 'Sim' &&(
+                        {paciente.laudo === 'Sim' &&(
                             <div className="Input__box">
                                 <label htmlFor="">CID</label>
                                 <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder={paciente.code_cid}/>
