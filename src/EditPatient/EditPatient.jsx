@@ -35,6 +35,7 @@ const [message, setMessage] = useState('');
 
 
 const isValidatedInputsPatient = newName|| newDateBirth|| newDateCreation|| hasLaudo;
+const isValidatedInputsAddress = newCEP|| newStreet|| newNumber|| newBairro || newCity;
 
 const updatePatient = () =>{
     if(isValidatedInputsPatient){
@@ -46,6 +47,35 @@ const updatePatient = () =>{
             pacienteId: paciente.id,
         }
         axios.post('https://api-casa-azul.up.railway.app/api/updatePatient/', objectUpdatePatient)
+        .then(res => {
+            if(res.data.Success === "Success"){
+                setMessage("Paciente atualizado com sucesso!")
+                setTimeout(() => {
+                    setMessage(null);
+                    navigate("/Paciente");
+                  }, 2000);
+            }
+        }).catch(err => console.log(err))
+    }else{
+        setMessage("É necessário ao menos um campos.")
+        setTimeout(() => {
+            setMessage(null);
+          }, 2000);
+    }
+    
+}
+//Function to update address
+const updateAddress = () =>{
+    if(isValidatedInputsAddress){
+        const objectUpdateAddress ={
+            newCEP,
+            newStreet,
+            newNumber,
+            newBairro,
+            newCity,
+            addressId: paciente.address_id,
+        }
+        axios.post('https://api-casa-azul.up.railway.app/api/updateAddress/', objectUpdateAddress)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessage("Paciente atualizado com sucesso!")
@@ -154,9 +184,11 @@ const updatePatient = () =>{
                                 Salvar
                             </button>
                         )}
-                        <button className={`Btn_cadastrar ${isValidated ? 'Skilled__button' : ''}`} onClick={updatePatient}>
-                            Cadastrar
-                        </button>
+                        {isValidatedInputsAddress &&(
+                            <button className={`Btn_cadastrar ${isValidatedInputsAddress ? 'Skilled__button' : ''}`} onClick={updateAddress}>
+                                Salvar
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
