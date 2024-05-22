@@ -123,12 +123,11 @@
     padding-left: 10px;
     margin-top: 20px;
     margin-right: 50px;
-    border-bottom: 1px solid #E5E5E5;
     font-size: 25px;
-    color: black;
-    padding: 5px;
-    padding-left: 12px;
+    color: #000;
     max-width: 940px;
+    margin-left: 10px;
+    margin-bottom: 10px;
 
 }
 .add__paciente{
