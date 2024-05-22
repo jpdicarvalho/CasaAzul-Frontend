@@ -33,7 +33,6 @@ const [hasLaudo, setHasLaudo] = useState('');
 const [newCID, setNewCID] = useState('');
 const [message, setMessage] = useState('');
 
-
 const isValidatedInputsPatient = newName|| newDateBirth|| newDateCreation|| hasLaudo;
 const isValidatedInputsAddress = newCEP|| newStreet|| newNumber|| newBairro || newCity;
 const isValidatedPatientANDaddress = isValidatedInputsPatient && isValidatedInputsAddress;
@@ -101,7 +100,65 @@ const updatePatientANDaddress = () =>{
     updatePatient()
     updateAddress()
 }
+const updateLaudoANDcid = () =>{
+    let valuesLaudoANDcid ={}
 
+    if(hasLaudo === 'Sim' && newCID){
+         valuesLaudoANDcid = {hasLaudo, newCID}
+    }else if(hasLaudo === 'Não'){
+        valuesLaudoANDcid = {hasLaudo, newCID: "Não informado"}
+    }
+    // Obter as chaves do objeto como um array
+    const keys = Object.keys(myObject);
+
+    // Verificar o tamanho do array de chaves
+    const size = keys.length;
+    if(size === 2){
+        axios.post('https://api-casa-azul.up.railway.app/api/updateLaudoANDcid/', valuesLaudoANDcid)
+        .then(res => {
+            if(res.data.Success === "Success"){
+                setMessage("Paciente atualizado com sucesso!")
+                setTimeout(() => {
+                    setMessage(null);
+                    navigate("/Paciente");
+                  }, 2000);
+            }
+        }).catch(err => console.log(err))
+    }
+}
+const renderBtn = () =>{
+    if(isValidatedInputsPatient && !isValidatedInputsAddress){
+        return(
+            <div>
+                {isValidatedInputsPatient &&(
+                            <button className={`Btn_cadastrar ${isValidatedInputsPatient ? 'Skilled__button' : ''}`} onClick={updatePatient}>
+                                updatePatient
+                            </button>
+                        )}
+            </div>
+        )
+    }else if(isValidatedInputsAddress && !isValidatedInputsPatient){
+        return(
+            <div>
+                {isValidatedInputsAddress &&(
+                            <button className={`Btn_cadastrar ${isValidatedInputsAddress ? 'Skilled__button' : ''}`} onClick={updateAddress}>
+                                updateAddress
+                            </button>
+                        )}
+            </div>
+        )
+    }else if(isValidatedPatientANDaddress){
+        return(
+            <div>
+                {isValidatedPatientANDaddress &&(
+                            <button className={`Btn_cadastrar ${isValidatedPatientANDaddress ? 'Skilled__button' : ''}`} onClick={updatePatientANDaddress}>
+                                updatePatientANDaddress
+                            </button>
+                        )}
+            </div>
+        )
+    }
+}
     return(
         <div className="container__form">
             <div className='main__form'>
@@ -155,7 +212,7 @@ const updatePatientANDaddress = () =>{
                                 <input 
                                     type="checkbox"  
                                     className='input__inner'
-                                    checked={paciente.laudo === 'Sim' ? paciente.laudo:''}
+                                    checked={paciente.laudo === 'Sim' || hasLaudo === 'Sim'}
                                     onChange={(e) => {setHasLaudo('Sim')}} // Define o estado como true se marcado, false se não marcado
                                 />
                                 Sim
@@ -165,13 +222,13 @@ const updatePatientANDaddress = () =>{
                                 <input 
                                     type="checkbox"  
                                     className='input__inner'
-                                    checked={hasLaudo === 'Não'}
-                                    onChange={(e) => {setHasLaudo('Não'), setNewCID('não')}} // Define o estado como false se marcado, true se não marcado
+                                    checked={paciente.laudo === 'Não' && hasLaudo !== 'Sim'}
+                                    onChange={(e) => {setHasLaudo('Não')}} // Define o estado como false se marcado, true se não marcado
                                 />
                                 Não
                             </label>
                         </div>
-                        {paciente.laudo === 'Sim' &&(
+                        {hasLaudo === 'Sim' &&(
                             <div className="Input__box">
                                 <label htmlFor="">CID</label>
                                 <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder={paciente.code_cid}/>
@@ -188,22 +245,8 @@ const updatePatientANDaddress = () =>{
                             </div>
                             
                         )}
-
-                        {isValidatedInputsPatient &&(
-                            <button className={`Btn_cadastrar ${isValidatedInputsPatient ? 'Skilled__button' : ''}`} onClick={updatePatient}>
-                                Salvar
-                            </button>
-                        )}
-                        {isValidatedInputsAddress &&(
-                            <button className={`Btn_cadastrar ${isValidatedInputsAddress ? 'Skilled__button' : ''}`} onClick={updateAddress}>
-                                Salvar
-                            </button>
-                        )}
-                        {isValidatedPatientANDaddress &&(
-                            <button className={`Btn_cadastrar ${isValidatedPatientANDaddress ? 'Skilled__button' : ''}`} onClick={updatePatientANDaddress}>
-                                Salvar
-                            </button>
-                        )}
+                        {renderBtn()}
+                        <button onClick={updateLaudoANDcid}>laudoANDcid</button>
                     </div>
                 </div>
             </div>
