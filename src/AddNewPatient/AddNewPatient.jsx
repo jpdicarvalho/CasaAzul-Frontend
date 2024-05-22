@@ -103,37 +103,37 @@ const createNewPatient = () =>{
                     <div className="container__one">
                         <div className="Input__box">
                             <label htmlFor="">Nome</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewName(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewName(e.target.value)}} placeholder="Nome do paciente"/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Data de nascimento</label>
-                            <input type="date" className='input__inner' onChange={(e) => {setNewDateBirth(e.target.value)}}/>
+                            <input type="date" className='input__inner' onChange={(e) => {setNewDateBirth(e.target.value)}} />
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">CEP</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewCEP(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewCEP(e.target.value)}} placeholder="CEP"/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Rua</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewStreet(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewStreet(e.target.value)}} placeholder="Rua"/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Bairro</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewBairro(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewBairro(e.target.value)}} placeholder="Bairro"/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Número da casa</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewNumber(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewNumber(e.target.value)}}placeholder="Nº"/>
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Cidade</label>
-                            <input type="text" className='input__inner' onChange={(e) => {setNewCity(e.target.value)}}/>
+                            <input type="text" className='input__inner' onChange={(e) => {setNewCity(e.target.value)}}placeholder="Cidade"/>
                         </div>
                     </div>
                     <div className="container__two">
                         <div className="Input__box">
                             <label htmlFor="">Data de inscrição</label>
-                            <input type="date" className='input__inner'onChange={(e) => {setNewDateCreation(e.target.value)}}/>
+                            <input type="date" className='input__inner'onChange={(e) => {setNewDateCreation(e.target.value)}} />
                         </div>
                         <div className="Input__box">
                             <label htmlFor="">Possuí Laudo? </label>
@@ -160,7 +160,7 @@ const createNewPatient = () =>{
                         {hasLaudo === 'Sim' &&(
                             <div className="Input__box">
                                 <label htmlFor="">CID</label>
-                                <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}}/>
+                                <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder="CID"/>
                             </div>
                         )}
                         
