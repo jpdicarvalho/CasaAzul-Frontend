@@ -37,10 +37,13 @@ label{
     color: black;
 }
 .input__inner{
+    margin-right: 10px;
     outline: none;
     height: 30px;
     border-radius: 5px;
     border: 1px solid #716e6ec6;
+    background: #fff;
+    color: black;
 }
 .Btn_cadastrar{
     background: transparent;
@@ -71,9 +74,6 @@ label{
     display: flex;
     justify-content: start;
     align-items: center;
-}
-.input__inner{
-    margin-right: 10px;
 }
 .message__success{
     display: flex;
