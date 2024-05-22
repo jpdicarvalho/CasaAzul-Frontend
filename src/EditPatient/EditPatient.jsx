@@ -37,7 +37,6 @@ const [message, setMessage] = useState('');
 const isValidatedInputsPatient = newName|| newDateBirth|| newDateCreation|| hasLaudo;
 const isValidatedInputsAddress = newCEP|| newStreet|| newNumber|| newBairro || newCity;
 const isValidatedPatientANDaddress = isValidatedInputsPatient && isValidatedInputsAddress;
-console.log(isValidatedPatientANDaddress)
 //Function to update patient
 const updatePatient = () =>{
     if(isValidatedInputsPatient){
@@ -101,6 +100,20 @@ const updateAddress = () =>{
 const updatePatientANDaddress = () =>{
     updatePatient()
     updateAddress()
+}
+
+const renderBtn = () =>{
+    if(isValidatedInputsPatient){
+        return (
+            <div>
+                {isValidatedInputsPatient &&(
+                            <button className={`Btn_cadastrar ${isValidatedInputsPatient ? 'Skilled__button' : ''}`} onClick={updatePatient}>
+                                Salvar
+                            </button>
+                        )}
+            </div>
+        )
+    }else if()
 }
     return(
         <div className="container__form">
@@ -188,11 +201,8 @@ const updatePatientANDaddress = () =>{
                             </div>
                             
                         )}
-                        {isValidatedInputsPatient &&(
-                            <button className={`Btn_cadastrar ${isValidatedInputsPatient ? 'Skilled__button' : ''}`} onClick={updatePatient}>
-                                Salvar
-                            </button>
-                        )}
+
+                        
                         {isValidatedInputsAddress &&(
                             <button className={`Btn_cadastrar ${isValidatedInputsAddress ? 'Skilled__button' : ''}`} onClick={updateAddress}>
                                 Salvar
