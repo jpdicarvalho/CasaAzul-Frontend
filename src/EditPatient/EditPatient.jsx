@@ -109,7 +109,7 @@ const updateLaudoANDcid = () =>{
         valuesLaudoANDcid = {hasLaudo, newCID: "Não informado"}
     }
     // Obter as chaves do objeto como um array
-    const keys = Object.keys(myObject);
+    const keys = Object.keys(valuesLaudoANDcid);
 
     // Verificar o tamanho do array de chaves
     const size = keys.length;
