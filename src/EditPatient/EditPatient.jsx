@@ -36,7 +36,8 @@ const [message, setMessage] = useState('');
 
 const isValidatedInputsPatient = newName|| newDateBirth|| newDateCreation|| hasLaudo;
 const isValidatedInputsAddress = newCEP|| newStreet|| newNumber|| newBairro || newCity;
-
+const isValidatedPatientANDAddress = isValidatedInputsPatient && isValidatedInputsAddress;
+console.log(isValidatedPatientANDAddress)
 //Function to update patient
 const updatePatient = () =>{
     if(isValidatedInputsPatient){
