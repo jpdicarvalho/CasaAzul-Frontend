@@ -37,6 +37,7 @@ const [message, setMessage] = useState('');
 const isValidatedInputsPatient = newName|| newDateBirth|| newDateCreation|| hasLaudo;
 const isValidatedInputsAddress = newCEP|| newStreet|| newNumber|| newBairro || newCity;
 
+//Function to update patient
 const updatePatient = () =>{
     if(isValidatedInputsPatient){
         const objectUpdatePatient ={
@@ -64,6 +65,7 @@ const updatePatient = () =>{
     }
     
 }
+
 //Function to update address
 const updateAddress = () =>{
     if(isValidatedInputsAddress){
@@ -146,6 +148,7 @@ const updateAddress = () =>{
                                 <input 
                                     type="checkbox"  
                                     className='input__inner'
+                                    value={paciente.laudo ? paciente.laudo:''}
                                     checked={hasLaudo === 'Sim'}
                                     onChange={(e) => {setHasLaudo('Sim')}} // Define o estado como true se marcado, false se não marcado
                                 />
