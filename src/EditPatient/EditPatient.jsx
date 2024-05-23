@@ -95,20 +95,9 @@ const updateAddress = () =>{
 
 //Function to update laudo and cid
 const updateLaudoANDcid = () =>{
-    let valuesLaudoANDcid ={}
-
-    if(hasLaudo === 'Sim' && newCID){
-         valuesLaudoANDcid = {hasLaudo, newCID}
-    }else if(hasLaudo === 'Não'){
-        valuesLaudoANDcid = {hasLaudo, newCID: "Não informado"}
-    }
-    // Obter as chaves do objeto como um array
-    const keys = Object.keys(valuesLaudoANDcid);
-
-    // Verificar o tamanho do array de chaves
-    const size = keys.length;
-    if(size === 2){
-        axios.post(`https://api-casa-azul.up.railway.app/api/updateLaudoANDcid/${paciente.id}`, valuesLaudoANDcid)
+    
+    if(newCID){
+        axios.post(`https://api-casa-azul.up.railway.app/api/updateLaudoANDcid/${paciente.id}`, newCID)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessage("Alteração salva com sucesso!")
@@ -131,7 +120,7 @@ const updateLaudoANDcid = () =>{
                 <div className="subtittle__form">
                     Edite as informações necessárias do paciente
                 </div>
-                {message === "Paciente cadastrado com sucesso!" ? (
+                {message === "Alteração salva com sucesso!" ? (
                             <div className="message__success">
                                 <FaRegCheckCircle className="icon__message"/>{message}
                             </div>
@@ -160,39 +149,14 @@ const updateLaudoANDcid = () =>{
                                 Salvar
                             </button>
                         )}
-                         <div className="Input__box">
-                            <label htmlFor="">Possuí Laudo? </label>
-                            <label className="input__ckeckBox">
-                                <input 
-                                    type="checkbox"  
-                                    className='input__inner'
-                                    checked={paciente.laudo === 'Sim' || hasLaudo === 'Sim'}
-                                    onChange={(e) => {setHasLaudo('Sim')}} // Define o estado como true se marcado, false se não marcado
-                                />
-                                Sim
-                            </label>
-
-                            <label className="input__ckeckBox">
-                                <input 
-                                    type="checkbox"  
-                                    className='input__inner'
-                                    checked={paciente.laudo === 'Não' && hasLaudo !== 'Sim'}
-                                    onChange={(e) => {setHasLaudo('Não')}} // Define o estado como false se marcado, true se não marcado
-                                />
-                                Não
-                            </label>
-                        </div>
-                        {hasLaudo === 'Sim' &&(
+                         <div>
                             <div className="Input__box">
                                 <label htmlFor="">CID</label>
+                                <label style={{color: '#939090'}}>Para remover o dado anterior, digite "Não informado".</label>
                                 <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder={paciente.code_cid}/>
                             </div>
-                        )}
-                        {hasLaudo === 'Não' && !newCID &&(
-                            <button className="salve__btn" onClick={updateLaudoANDcid}>
-                                Salvar
-                            </button>
-                        )}
+                            
+                        </div>
                         {newCID &&(
                             <button className="salve__btn" onClick={updateLaudoANDcid}>
                                 Salvar
