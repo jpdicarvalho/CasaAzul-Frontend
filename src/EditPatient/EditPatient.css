@@ -1,0 +1,15 @@
+.salve__btn{
+    border: 1px solid #0f0;
+    background: transparent;
+    color: #0f0;
+    padding: 5px;
+    margin-left: 10px;
+    width: 100px;
+    transition: 0.5s;
+}
+.salve__btn:hover{
+    background: #0f0;
+    color: #fff;
+    transition: 0.5s;
+    border-radius: 5px;
+}
