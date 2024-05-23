@@ -97,7 +97,7 @@ const updateAddress = () =>{
 const updateLaudoANDcid = () =>{
     
     if(newCID){
-        axios.post(`https://api-casa-azul.up.railway.app/api/updateLaudoANDcid/${paciente.id}`, newCID)
+        axios.post(`https://api-casa-azul.up.railway.app/api/updateLaudoANDcid/${paciente.id}/${newCID}`, newCID)
         .then(res => {
             if(res.data.Success === "Success"){
                 setMessage("Alteração salva com sucesso!")
