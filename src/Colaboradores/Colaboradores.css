@@ -25,6 +25,8 @@
     padding-right: 5px;
     font-size: 25px;
     transition: 0.5s;
+    cursor: pointer;
+
 }
 .icon__arrow__menu__rotated{
     display: flex;
@@ -32,7 +34,7 @@
     align-items: center;
     transform: rotate(180deg);
     transition: 0.5s;
-
+    cursor: pointer;
 }
 .expand__container__colaborador{
     height: 400px;

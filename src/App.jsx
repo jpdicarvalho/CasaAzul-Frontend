@@ -6,6 +6,7 @@ import AddNewPatient from './AddNewPatient/AddNewPatient';
 import Atendimento from './Atendimento/Atendimento';
 import AddNewAtendimento from './AddNewAtendimento/AddNewAtendimento';
 import Colaboradores from './Colaboradores/Coladoradores';
+import EditColaborador from './EditColaborador/EditColaborador';
 import Relatorios from './Relatorios/Relatorios';
 import AddNewColaborador from './AddNewColaborador/AddNewColaborador';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/Paciente' element={<Paciente/>}/>
         <Route path='/EditPatient' element={<EditPatient/>}/>
         <Route path='/Colaboradores' element={<Colaboradores/>}/>
+        <Route path='/EditColaborador' element={<EditColaborador/>}/>
         <Route path='/Relatorios' element={<Relatorios/>}/>
         <Route path='/AddNewPatient' element={<AddNewPatient/>}/>
         <Route path='/AddNewColaborador' element={<AddNewColaborador/>}/>

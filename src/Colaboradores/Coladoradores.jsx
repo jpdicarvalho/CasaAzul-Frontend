@@ -63,6 +63,11 @@ const toggleItem = (itemId) => {
       setExpandedColaborador([...expandedColaborador, itemId]);
     }
   };
+
+//====== Set edit colaborador =====
+const navigateToEditColaborador = (colaborador) => {
+    navigate("/EditColaborador", { state: { colaborador } });
+};
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -146,7 +151,7 @@ const toggleItem = (itemId) => {
                             </div>
                         </div>
                         <div className={`hidden__box__observation ${expandedColaborador.includes(item.id) ? 'box__btn__edit':''}`}>
-                            <button className='btn__edit'>
+                            <button className='btn__edit' onClick={() => navigateToEditColaborador(item)}>
                                 Editar
                             </button>
                         </div>
