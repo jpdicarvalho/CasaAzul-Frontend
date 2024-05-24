@@ -145,7 +145,11 @@ const toggleItem = (itemId) => {
                                 <p className='observation__inner'>{item.observation}</p>
                             </div>
                         </div>
-                        
+                        <div className={`hidden__box__observation ${expandedColaborador.includes(item.id) ? 'box__btn__edit':''}`}>
+                            <button className='btn__edit'>
+                                Editar
+                            </button>
+                        </div>
 
                     </div>
                 ))}

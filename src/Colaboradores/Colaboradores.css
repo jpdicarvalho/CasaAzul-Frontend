@@ -44,7 +44,6 @@
 }
 .hidden__box__observation{
     opacity: 0;
-    transition: 0.5s;
 }
 .box__observation{
     opacity: 1;
@@ -59,4 +58,27 @@
     margin-top: 10px;
     margin-left: 5px;
     color: #535050;
+}
+.box__btn__edit{
+    width: 150px;
+    margin-bottom: 10px;
+    opacity: 1;
+}
+.btn__edit{
+    width: 100%;
+    padding: 3px;
+    background: transparent;
+    border: 1px solid blue;
+    color: blue;
+    height: 35px;
+    border-radius: 3px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.btn__edit:hover{
+    background: blue;
+    color: white;
+    transition: 0.5s;
+    border-radius: 5px;
+    cursor: pointer;
 }
