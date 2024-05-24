@@ -42,7 +42,7 @@ const updateColaborador = () =>{
             colaboradorId: colaborador.id
         }
 
-        axios.post('https://api-casa-azul.up.railway.app/api/updateColaborador/', objectColaborador)
+        axios.put('https://api-casa-azul.up.railway.app/api/updateColaborador/', objectColaborador)
         .then(res => {
             if(res.data.Message === "Success"){
                 setMessage("Alteração realizada com sucesso!")
@@ -69,7 +69,16 @@ console.log(colaborador)
                 <div className="tittle__form">
                     Editar Colaborador
                 </div>
-                
+                {message === "Alteração realizada com sucesso!" ? (
+                            <div className="message__success">
+                                <FaRegCheckCircle className="icon__message"/>{message}
+                            </div>
+                        ):(
+                            <div className={` ${message ? 'message__erro' : ''}`}>
+                                <MdOutlineErrorOutline  className="icon__message"/>{message}
+                            </div>
+                            
+                        )}
                 <div className="container__inputs">
                     <div className="container__one">
                         <div className="Input__box">
@@ -105,17 +114,6 @@ console.log(colaborador)
                             <textarea type="text" className='input__textarea' onChange={(e) => {setNewObservation(e.target.value)}} placeholder={colaborador.observation}/>
                         </div>
 
-                        {message === "Colaborador cadastrado com sucesso!" ? (
-                            <div className="message__success">
-                                <FaRegCheckCircle className="icon__message"/>{message}
-                            </div>
-                        ):(
-                            <div className={` ${message ? 'message__erro' : ''}`}>
-                                <MdOutlineErrorOutline  className="icon__message"/>{message}
-                            </div>
-                            
-                        )}
-                        
                         <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={updateColaborador}>
                             Salvar
                         </button>
