@@ -12,8 +12,8 @@ import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { IoGitNetworkOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
-import { MdOutlineErrorOutline } from "react-icons/md";
-import { FaRegCheckCircle } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+
 import axios from 'axios';
 
 const Paciente = () =>{
@@ -49,11 +49,22 @@ useEffect(() =>{
     getAllPatients()
 }, [])
 
+// Function to expanded div Colaborador
+const [expandedPaciente, setExpandedPaciente] = useState([]);
+
+//Function to expanded booking cards
+const toggleItem = (itemId) => {
+    if (expandedPaciente.includes(itemId)) {
+      setExpandedPaciente(expandedPaciente.filter(id => id !== itemId));
+    } else {
+      setExpandedPaciente([...expandedPaciente, itemId]);
+    }
+  };
 //====== Set edit paciente =====
 const navigateToEditPaciente = (pacientes) => {
     navigate("/EditPatient", { state: { pacientes } });
 };
-
+console.log(pacientes)
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -120,20 +131,35 @@ const navigateToEditPaciente = (pacientes) => {
 
                 </div>
                 {pacientes.map((item) =>(
-                    <div key={item.id} className='conatiner__paciente'>
+                    <div key={item.id} className={`conatiner__paciente ${expandedPaciente.includes(item.id) ? 'expand__container__paciente':''}`}>
                         <div className='pacient__box'>
                             <p className='pacient__inner'>{item.name}</p>
                             <p className='pacient__inner'>{item.date_birth}</p>
                             <p className='pacient__inner'>{item.registration_date}</p>
                             <p className='pacient__inner'>{item.laudo}</p>
                             <p className='pacient__inner'>{item.code_cid}</p>
-                            <p className='icon__patient'>
-                                <FaRegEdit onClick={() => navigateToEditPaciente(item)}/>
+
+                            <p className='icon__arrow__menu' onClick={() => toggleItem(item.id)} >
+                                <IoIosArrowDown className={`icon__arrow__menu ${expandedPaciente.includes(item.id) ? 'icon__arrow__menu__rotated':''}`}/>
                             </p>
+                            
                         </div>
-                        <div className="conatiner__edit__iputs">
+                        <div className={`hidden__box__address__patient ${expandedPaciente.includes(item.id) ? 'box__address__patient':''}`}>
+                            <p className='tiitle__observation'>Endereço</p>
+                            <div>
+                                <p className='observation__inner'>Rua: {item.street}</p>
+                                <p className='observation__inner'>Nº: {item.number}</p>
+                                <p className='observation__inner'>Bairro: {item.neighborhood}</p>
+                                <p className='observation__inner'>Cidade: {item.city}</p>
+                                <p className='observation__inner'>CEP: {item.CEP}</p>
+                            </div>
+                        </div>
+                        <div className={`hidden__box__observation ${expandedPaciente.includes(item.id) ? 'box__btn__edit':''}`}>
+                            <button className='btn__edit' onClick={() => navigateToEditPaciente(item)}>
+                                Editar
+                            </button>
+                        </div>
                        
-                        </div>
                     </div>
                 ))}
             </div>

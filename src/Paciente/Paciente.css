@@ -157,25 +157,23 @@
 }
 .conatiner__paciente{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: baseline;
+    flex-direction: column;
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    padding: 5px;
-    height: 80px;
+    height: 60px;
     background:#fff;
     box-shadow: -3px 3px 7px 0px #00000030;
-    max-width: 940px;
+    max-width: 880px;
     transition: 0.5s;
 
 }
-.conatiner__paciente__selected{
-    background: red;
-    height: 300px;
-    transition: 0.5s;
+.expand__container__paciente{
+    height: 330px;
 }
+
 .pacient__box{
     display: flex;
     flex-direction: row;
@@ -199,4 +197,16 @@
     width: 100px;
     cursor: pointer;
     color: #0DB6D3;
+}
+.hidden__box__address__patient{
+    opacity: 0;
+}
+.box__address__patient{
+    opacity: 1;
+    transition: 0.5s;
+    min-width: 620px;
+    border-radius: 10px;
+    height: 100%;
+    margin-bottom: 20px;
+    color: #535050;
 }

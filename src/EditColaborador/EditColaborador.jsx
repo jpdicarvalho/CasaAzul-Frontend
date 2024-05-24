@@ -44,7 +44,7 @@ const updateColaborador = () =>{
 
         axios.put('https://api-casa-azul.up.railway.app/api/updateColaborador/', objectColaborador)
         .then(res => {
-            if(res.data.Message === "Success"){
+            if(res.data.Success === "Success"){
                 setMessage("Alteração realizada com sucesso!")
                 setTimeout(() => {
                     setMessage(null);

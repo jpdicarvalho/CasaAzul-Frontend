@@ -11,8 +11,6 @@ import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { IoGitNetworkOutline } from "react-icons/io5";
-import { FaRegEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 
 import axios from 'axios';
@@ -50,13 +48,11 @@ const getAllColaboradores = () =>{
 useEffect(() =>{
     getAllColaboradores()
 }, [])
-//========================================
+// Function to expanded div Colaborador
 const [expandedColaborador, setExpandedColaborador] = useState([]);
-const [colaboradorId, setColaboradorId] = useState('');
 
 //Function to expanded booking cards
 const toggleItem = (itemId) => {
-    setColaboradorId(itemId)
     if (expandedColaborador.includes(itemId)) {
       setExpandedColaborador(expandedColaborador.filter(id => id !== itemId));
     } else {
