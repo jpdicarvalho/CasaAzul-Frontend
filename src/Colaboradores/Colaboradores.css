@@ -2,3 +2,52 @@
     margin-right: 20px;
     margin-bottom: 40px;
 }
+.container__colaborador{
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 60px;
+    background:#fff;
+    box-shadow: -3px 3px 7px 0px #00000030;
+    max-width: 740px;
+    transition: 0.5s;
+}
+.icon__arrow__menu{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: #535050;
+    width: 80px;
+    padding-right: 5px;
+    font-size: 25px;
+}
+.expand__container__colaborador{
+    height: 400px;
+}
+.tiitle__observation{
+    color: #535050a7;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.hidden__box__observation{
+    opacity: 0;
+    transition: 0.5s;
+}
+.box__observation{
+    opacity: 1;
+    transition: 0.5s;
+    background: rgba(128, 128, 128, 0.242);
+    min-width: 620px;
+    border-radius: 10px;
+    height: 100%;
+    margin-bottom: 20px;
+}
+.observation__inner{
+    margin-top: 10px;
+    margin-left: 5px;
+    color: #535050;
+}

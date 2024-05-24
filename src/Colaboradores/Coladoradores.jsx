@@ -13,6 +13,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { IoGitNetworkOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import { IoIosArrowDown } from "react-icons/io";
 
 import axios from 'axios';
 
@@ -49,7 +50,19 @@ const getAllColaboradores = () =>{
 useEffect(() =>{
     getAllColaboradores()
 }, [])
+//========================================
+const [expandedColaborador, setExpandedColaborador] = useState([]);
+const [colaboradorId, setColaboradorId] = useState('');
 
+//Function to expanded booking cards
+const toggleItem = (itemId) => {
+    setColaboradorId(itemId)
+    if (expandedColaborador.includes(itemId)) {
+      setExpandedColaborador(expandedColaborador.filter(id => id !== itemId));
+    } else {
+      setExpandedColaborador([...expandedColaborador, itemId]);
+    }
+  };
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -113,23 +126,27 @@ useEffect(() =>{
                    <p className='pacient__inner'>Profissão</p>
                    <p className='pacient__inner'>Inscrição</p>
                    <p className='pacient__inner'>Está atendendo?</p>
-                   <p className='pacient__inner'>Observação</p>
-
                 </div>
                 {colaboradores.map((item) =>(
-                    <div key={item.id} className='conatiner__paciente'>
-                        <div className='pacient__box'>
+                    <div key={item.id} className={`container__colaborador ${expandedColaborador.includes(item.id) ? 'expand__container__colaborador':''}`}>
+                        <div className='pacient__box' >
                             <p className='pacient__inner'>{item.name}</p>
                             <p className='pacient__inner'>{item.profession}</p>
                             <p className='pacient__inner'>{item.creation_date}</p>
                             <p className='pacient__inner'>{item.situation}</p>
-                            <p className='pacient__inner'>{item.observation}</p>
                             
-                            <p className='icon__patient'>
-                                <FaRegEdit />
-                                <MdDeleteOutline />
+                            <p className='icon__arrow__menu' onClick={() => toggleItem(item.id)}>
+                                <IoIosArrowDown />
                             </p>
                         </div>
+                        <div className={`hidden__box__observation ${expandedColaborador.includes(item.id) ? 'box__observation':''}`}>
+                            <p className='tiitle__observation'>Observação</p>
+                            <div>
+                                <p className='observation__inner'>{item.observation}</p>
+                            </div>
+                        </div>
+                        
+
                     </div>
                 ))}
             </div>

@@ -149,14 +149,21 @@ const updateLaudoANDcid = () =>{
                                 Salvar
                             </button>
                         )}
-                         <div>
                             <div className="Input__box">
                                 <label htmlFor="">CID</label>
-                                <label style={{color: '#939090'}}>Para remover o dado anterior, digite "Não informado".</label>
-                                <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder={paciente.code_cid}/>
+                                {paciente.code_cid !== "Não informado" ?(
+                                    <div className="Input__box">
+                                        <label style={{color: '#939090'}}>Para remover o dado anterior, digite "Não informado".</label>
+                                        <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder={paciente.code_cid}/>
+                                    </div>
+                                    
+                                ):(
+                                    <div>
+                                        <input type="text" className='input__inner' onChange={(e) => {setNewCID(e.target.value)}} placeholder={paciente.code_cid}/>
+                                    </div>
+                                )}
                             </div>
                             
-                        </div>
                         {newCID &&(
                             <button className="salve__btn" onClick={updateLaudoANDcid}>
                                 Salvar
