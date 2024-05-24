@@ -12,13 +12,6 @@ O objetivo deste documento é definir a visão para o desenvolvimento da aplica�
 
 A aplicação CasaAzul será uma ferramenta web que permitirá a administração das informações dos pacientes atendidos pela Casa Azul, bem como dos colaboradores envolvidos nos atendimentos. Além disso, permitirá a geração de relatórios detalhados sobre os atendimentos realizados.
 
-## Definições, Acrônimos e Abreviações
-
-- **TEA**: Transtorno do Espectro Autista
-- **CRUD**: Create (Criar), Read (Ler), Update (Atualizar), Delete (Apagar)
-- **CID**: Classificação Internacional de Doenças
-- **Casa Azul**: Instituição localizada em Santarém, dedicada ao suporte a pessoas com TEA e seus familiares
-
 ## Referências
 
 Este documento se baseia nas necessidades apresentadas pelo Instituto Casa Azul para a criação de uma aplicação web que auxilie no gerenciamento dos atendimentos e informações dos pacientes e colaboradores.
