@@ -15,9 +15,9 @@ const EditColaborador = () =>{
     
     const { colaborador } = location.state;
 
-const navigateToColaboradores = () => {
-    navigate("/Colaboradores" );
-};
+    const navigateToColaboradores = () => {
+        navigate("/Colaboradores" );
+    };
 
 const [newName, setNewName] = useState(null);
 const [newProfession, setNewProfession] = useState('');
@@ -25,12 +25,11 @@ const [newCPF, setNewCPF] = useState('');
 const [newDateCreation, setNewDateCreation] = useState('');
 const [isWorking, setIsworking] = useState('');
 const [newObservation, setNewObservation] = useState('');
-
 const [message, setMessage] = useState('');
 
 const isValidated = newName || newProfession || newCPF || newDateCreation || isWorking || newObservation;
 
-const createNewColaborador = () =>{
+const updateColaborador = () =>{
     if(isValidated){
 
         const objectColaborador ={
@@ -39,7 +38,8 @@ const createNewColaborador = () =>{
             newCPF,
             newDateCreation,
             isWorking,
-            newObservation
+            newObservation,
+            colaboradorId: colaborador.id
         }
 
         axios.post('https://api-casa-azul.up.railway.app/api/updateColaborador/', objectColaborador)
@@ -116,7 +116,7 @@ console.log(colaborador)
                             
                         )}
                         
-                        <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={createNewColaborador}>
+                        <button className={`Btn_cadastrar ${isValidated != false ? 'Skilled__button' : ''}`} onClick={updateColaborador}>
                             Salvar
                         </button>
                     </div>
