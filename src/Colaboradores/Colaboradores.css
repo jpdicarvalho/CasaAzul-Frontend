@@ -24,6 +24,15 @@
     width: 80px;
     padding-right: 5px;
     font-size: 25px;
+    transition: 0.5s;
+}
+.icon__arrow__menu__rotated{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    transform: rotate(180deg);
+    transition: 0.5s;
+
 }
 .expand__container__colaborador{
     height: 400px;

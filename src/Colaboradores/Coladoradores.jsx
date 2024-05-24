@@ -135,8 +135,8 @@ const toggleItem = (itemId) => {
                             <p className='pacient__inner'>{item.creation_date}</p>
                             <p className='pacient__inner'>{item.situation}</p>
                             
-                            <p className='icon__arrow__menu' onClick={() => toggleItem(item.id)}>
-                                <IoIosArrowDown />
+                            <p className='icon__arrow__menu' onClick={() => toggleItem(item.id)} >
+                                <IoIosArrowDown className={`icon__arrow__menu ${expandedColaborador.includes(item.id) ? 'icon__arrow__menu__rotated':''}`}/>
                             </p>
                         </div>
                         <div className={`hidden__box__observation ${expandedColaborador.includes(item.id) ? 'box__observation':''}`}>
