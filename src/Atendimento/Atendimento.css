@@ -1,3 +1,54 @@
+
+.container__tittle__table__atendimento{
+    display: flex;
+    flex-direction: row;
+    color: #535050;
+    font-weight: bold;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+.conatiner__atendimento{
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 80px;
+    background:#fff;
+    box-shadow: -3px 3px 7px 0px #00000030;
+    max-width: 880px;
+    transition: 0.5s;
+}
+.expand__container__atendimento{
+    height: 150px;
+}
+.atendimento__box{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    color: #535050;
+    font-size: 18px;
+    width: 100%;
+}
+.atendimento__inner{
+    width: 150px;
+    margin: 5px;
+}
+.hidden__box__atendimento{
+    opacity: 0;
+}
+.box__btn__Encerrar{
+    display: flex;
+    width: 150px;
+    margin-bottom: 10px;
+    opacity: 1;
+    transition: 2s;
+}
+.atendimento__icon{
+    color: #8d888830;
+}
 .selected{
     display: flex;
     justify-content: center;

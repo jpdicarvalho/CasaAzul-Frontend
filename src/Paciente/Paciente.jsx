@@ -64,7 +64,6 @@ const toggleItem = (itemId) => {
 const navigateToEditPaciente = (pacientes) => {
     navigate("/EditPatient", { state: { pacientes } });
 };
-console.log(pacientes)
     return(
         <div className="main">
             <div className="menu__lateral">

@@ -101,6 +101,7 @@ label{
     border-radius: 10px;
     padding: 3px;
     font-size: 14px;
+    opacity: 1;
 }
 .icon__message{
     margin-right: 5px;

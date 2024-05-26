@@ -13,6 +13,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { IoGitNetworkOutline } from "react-icons/io5";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { FaRegCheckCircle } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
 
 
 const Atendimento = () =>{
@@ -82,7 +83,19 @@ const getAllAtendimento = () =>{
 useEffect(() =>{
     getAllAtendimento()
 }, [hiddenBtn, messageCloseService])
+//===============================================
+// Function to expanded div Colaborador
+const [expandedAtendimento, setExpandedAtendimento] = useState([]);
 
+//Function to expanded booking cards
+const toggleItem = (itemId) => {
+    if (expandedAtendimento.includes(itemId)) {
+      setExpandedAtendimento(expandedAtendimento.filter(id => id !== itemId));
+    } else {
+      setExpandedAtendimento([...expandedAtendimento, itemId]);
+    }
+  };
+console.log(atendimentos)
     return(
         <div className="main">
             <div className="menu__lateral">
@@ -142,37 +155,38 @@ useEffect(() =>{
                 </div>
                 {messageCloseService === "Atendimento encerrado com sucesso." ? (
                             <div className="message__success">
-                                <FaRegCheckCircle className="icon__message"/>{messageCloseService}
+                                <FaRegCheckCircle className="icon__message" />{messageCloseService}
                             </div>
                         ):(
-                            <div className={` ${messageCloseService ? 'message__erro' : ''}`}>
+                            <div className={`hidden__box__atendimento ${messageCloseService ? 'message__erro' : ''}`}>
                                 <MdOutlineErrorOutline  className="icon__message"/>{messageCloseService}
                             </div>
                             
                         )}
-                <div className="container__tittle__table">
-                   <p className='pacient__inner'>Paciente</p>
-                   <p className='pacient__inner'>Atendimento</p>
-                   <p className='pacient__inner'>Colaborador</p>
-                   <p className='pacient__inner'>Data de criação</p>
-                   <p className='pacient__inner'>Status</p>
+                <div className="container__tittle__table__atendimento">
+                   <p className='atendimento__inner'>Paciente</p>
+                   <p className='atendimento__inner'>Atendimento</p>
+                   <p className='atendimento__inner'>Colaborador</p>
+                   <p className='atendimento__inner'>Data de criação</p>
+                   <p className='atendimento__inner'>Status</p>
                 </div>
                 
                 {atendimentos.map((item) =>(
-                    <div key={item.service_id} className='conatiner__paciente' >
-                        <div className='pacient__box'>
-                            <p className='pacient__inner'>{item.paciente_name}</p>
-                            <p className='pacient__inner'>{item.service_name}</p>
-                            <p className='pacient__inner'>{item.profissional_name}</p>
-                            <p className='pacient__inner'>{item.date_service}</p>
-                            <p className='pacient__inner'>{item.status}</p>
-                            <p className='icon__patient'>
-
+                    <div key={item.service_id} className={`conatiner__atendimento ${expandedAtendimento.includes(item.service_id) ? 'expand__container__atendimento':''}`}>
+                        <div className='atendimento__box'>
+                            <p className='atendimento__inner'>{item.paciente_name}</p>
+                            <p className='atendimento__inner'>{item.service_name}</p>
+                            <p className='atendimento__inner'>{item.profissional_name}</p>
+                            <p className='atendimento__inner'>{item.date_service}</p>
+                            <p className='atendimento__inner'>{item.status}</p>
+                            <p className='icon__arrow__menu' onClick={() => toggleItem(item.service_id)} >
+                                <IoIosArrowDown className={`icon__arrow__menu ${expandedAtendimento.includes(item.service_id) ? 'icon__arrow__menu__rotated':''}`}/>
+                            </p>
+                        </div>
+                        <div className={`hidden__box__atendimento ${expandedAtendimento.includes(item.service_id) ? 'box__btn__Encerrar':''}`}>
                             <button className={`add__paciente ${hiddenBtn === true ? 'hiddenBtn':''}`} onClick={hiddenBtnCloseService}>
                                 Encerrar
                             </button>
-                            
-                            </p>
                             <button className={`Btn__cancelar ${hiddenBtn === false ? 'hiddenBtn':''}`} onClick={showBtnCloseService}>
                                 Cancelar
                             </button>
@@ -180,6 +194,7 @@ useEffect(() =>{
                                 Confirmar
                             </button>
                         </div>
+                            
                     </div>
                 ))}
                 
