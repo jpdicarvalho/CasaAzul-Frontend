@@ -19,9 +19,4 @@ Atualmente, a Casa Azul enfrenta dificuldades no gerenciamento das informações
 - **Administradores**: Responsáveis pelo gerenciamento completo do sistema, incluindo a administração de usuários e a configuração de tipos de atendimentos.
 - **Colaboradores**: Profissionais que realizam os atendimentos e registram as informações no sistema.
 
-### Necessidades dos Usuários
-
-- **Administradores**: Necessitam de ferramentas para gerenciar usuários, configurar tipos de atendimento e acessar relatórios detalhados.
-- **Colaboradores**: Precisam de uma interface intuitiva para registrar atendimentos, consultar históricos de pacientes e acessar informações relevantes para seu trabalho.
-
 ## Isso é tudo pessoal!!
