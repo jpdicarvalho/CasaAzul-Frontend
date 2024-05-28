@@ -11,7 +11,6 @@ import { PiUsers } from "react-icons/pi";
 import { LiaUserSolid } from "react-icons/lia";
 import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
-import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { IoGitNetworkOutline } from "react-icons/io5";
 
 
@@ -40,7 +39,7 @@ const [hiddenDivPaciente, setHiddenDivPaciente] = useState(false);
 const [messagePacientes, setMessagePacientes] = useState('');
 
 const getAllPacientes = () =>{
-    axios.get(`https://api-casa-azul.up.railway.app/api/get-pacientes/${SearchPaciente}`)
+    axios.get(`http://localhost:8000/api/get-pacientes/${SearchPaciente}`)
     .then(res =>{
         if(res.data.Success === "Success"){
             setMessagePacientes('')
@@ -68,7 +67,7 @@ const [serviceId, setServiceId] = useState('');
 const [hiddenDivService, setHiddenDivService] = useState(false);
 
 const getAllServices = () =>{
-    axios.get('https://api-casa-azul.up.railway.app/api/get-services/')
+    axios.get('http://localhost:8000/api/get-services/')
     .then(res =>{
         if(res.data.Success === "Success"){
             setHiddenDivService(false)
@@ -100,7 +99,7 @@ const getDataTypeService = (paciente_id, name_paciente) =>{
 //===== genereta report by patient =====
 const generateReportByPatient = () =>{
     if(pacienteId){
-        axios.get(`https://api-casa-azul.up.railway.app/api/generateReportByPatient/${pacienteId}`)
+        axios.get(`http://localhost:8000/api/generateReportByPatient/${pacienteId}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -114,7 +113,7 @@ const generateReportByPatient = () =>{
 //===== genereta report by service =====
 const generateReportByService = () =>{
     if(serviceId){
-        axios.get(`https://api-casa-azul.up.railway.app/api/generateReportByService/${serviceId}`)
+        axios.get(`http://localhost:8000/api/generateReportByService/${serviceId}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -128,7 +127,7 @@ const generateReportByService = () =>{
 //===== genereta report by period =====
 const generateReportByPeriod = () =>{
     if(dateInitial && dateFinal){
-        axios.get(`https://api-casa-azul.up.railway.app/api/generateReportByPeriod/${dateInitial}/${dateFinal}`)
+        axios.get(`http://localhost:8000/api/generateReportByPeriod/${dateInitial}/${dateFinal}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -147,10 +146,28 @@ const [MessageReport, setMessageReport] = useState('');
 
 const isValuesInputs = pacienteId && serviceId && dateInitial && dateFinal;
 
+//Function to order report by date
+function orderReport(dataReport) {
+    dataReport.sort((a, b) =>{
+        const [yearA, monthA, dayA] = a.data_servico.split('-');
+        const [yearB, monthB, dayB] = b.data_servico.split('-');
+
+        const numberDataA = Number(`${yearA}${monthA}${dayA}`);
+        const numberDataB = Number(`${yearB}${monthB}${dayB}`);
+
+        if(numberDataA < numberDataB){
+            return -1
+        }else if(numberDataA > numberDataB){
+            return 1
+        }else{
+            return 0
+        }
+    })
+}
 const generateReportWithAllValues = () =>{
     if(isValuesInputs){
         
-        axios.get(`https://api-casa-azul.up.railway.app/api/generateReport/${pacienteId}/${serviceId}/${dateInitial}/${dateFinal}`)
+        axios.get(`http://localhost:8000/api/generateReport/${pacienteId}/${serviceId}/${dateInitial}/${dateFinal}`)
         .then(res =>{
             if(res.data.Success === "Success"){
                 setDataReport(res.data.result);
@@ -164,7 +181,7 @@ const generateReportWithAllValues = () =>{
         setMessageReport("Preencha todos os campos para gerar o relatório.")
     }
 }
-
+orderReport(dataReport)
 return(
         <div className="main">
             <div className="menu__lateral">
@@ -302,11 +319,11 @@ return(
                 
                 {dataReport.length > 0 ?(
                     dataReport.map((item) =>(
-                        <div key={item.service_id} className='conatiner__paciente' >
+                        <div key={item.service_id} className='conatiner__paciente name__service__report' >
                             <div className='pacient__box'>
                                 <p className='pacient__inner'>{item.patient_name}</p>
                                 <p className='pacient__inner'>{item.professional_name}</p>
-                                <p className='pacient__inner'style={{marginRight: '20px'}}>{item.name_service}</p>
+                                <p className='pacient__inner 'style={{marginRight: '20px'}}>{item.name_service}</p>
                                 <p className='pacient__inner'>{item.data_servico}</p>
                             </div>
                         </div>
