@@ -60,7 +60,6 @@ const updateColaborador = () =>{
     }
     
 }
-console.log(colaborador)
     return(
         <div className="container__form">
             <div className='main__form'>

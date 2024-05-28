@@ -95,8 +95,8 @@ const toggleItem = (itemId) => {
       setExpandedAtendimento([...expandedAtendimento, itemId]);
     }
   };
-console.log(atendimentos)
-    return(
+
+  return(
         <div className="main">
             <div className="menu__lateral">
             <div className="logo">

@@ -164,6 +164,7 @@ const generateReportWithAllValues = () =>{
         setMessageReport("Preencha todos os campos para gerar o relatório.")
     }
 }
+
 return(
         <div className="main">
             <div className="menu__lateral">
