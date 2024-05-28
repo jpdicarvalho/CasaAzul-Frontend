@@ -1,4 +1,4 @@
-# Aplicação Web CasaAzul
+# Sistema de Gerenciamento CasaAzul
 
 ## Visão Geral
 
@@ -6,7 +6,7 @@
 
 ## Escopo
 
-A aplicação CasaAzul será uma ferramenta web que permitirá a administração das informações dos pacientes atendidos pela Casa Azul, bem como dos colaboradores envolvidos nos atendimentos. Além disso, permitirá a geração de relatórios detalhados sobre os atendimentos realizados.
+O Sistema de Gerenciamento CasaAzul, será uma ferramenta web que permitirá a administração das informações dos pacientes atendidos pela Casa Azul, bem como dos colaboradores envolvidos nos atendimentos. Além disso, permitirá a geração de relatórios detalhados sobre os atendimentos realizados.
 
 
 ### Declaração do Problema
