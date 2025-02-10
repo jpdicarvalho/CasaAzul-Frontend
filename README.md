@@ -1,4 +1,5 @@
 # [Sistema de Gerenciamento Casa Azul](https://jpdicarvalho.github.io/CasaAzul-Frontend/#/Atendimento)
+![image](https://github.com/user-attachments/assets/70b05ff5-0542-4161-9221-5393ca5e3cbc)
 
 ## Visão Geral
 
